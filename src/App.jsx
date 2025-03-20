@@ -1,9 +1,12 @@
-import "./App.css";
+import "./global.css";
+import EmailForm from "./components/EmailForm";
+import OtpForm from "./components/OtpForm";
 
 function App() {
   return (
-    <div className="bg-white w-4/12 h-screen">
-      <h1>Fill OTP</h1>
+    <div className="inline-flex w-screen">
+      <EmailForm />
+      <OtpForm />
     </div>
   );
 }
