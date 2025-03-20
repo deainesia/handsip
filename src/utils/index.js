@@ -1,5 +1,5 @@
 import google from "/assets/images/google.webp";
-import apple from "/assets/images/apple.svg";
+import apple from "/assets/images/apple.png";
 import background1 from "/assets/images/background1.jpg";
 import background2 from "/assets/images/background2.jpg";
 import background3 from "/assets/images/background3.jpg";

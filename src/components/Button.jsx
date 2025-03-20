@@ -9,8 +9,8 @@ export default function Button({ logo, type, variant, text }) {
 
   function OutlineButton() {
     return (
-      <button className="button-secondary">
-        <img src={logo} width={24} height={24} /> {text}
+      <button className="button-outline">
+        <img src={logo} width={20} height={20} /> {text}
       </button>
     );
   }
