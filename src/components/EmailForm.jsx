@@ -1,27 +1,67 @@
-import { logoBrand } from "../utils";
+import { appleLogo, googleLogo } from "../utils";
+import Button from "./Button";
+import InputText from "./InputText";
+import Toggle from "./Toggle";
+import { useState } from "react";
 
 export default function EmailForm() {
+  const [toggle, setToggle] = useState(true);
+
+  function handleToggle() {
+    setToggle(!toggle);
+  }
+
   return (
-    <div className="h-screen w-5/12 bg-white p-4">
-      <div className="inline-flex items-center gap-3">
-        <img src={logoBrand} alt="HandSip logo brand" width={48} height={48} />
-        <p className="text-primary font-playfair text-[16px] font-bold italic tracking-normal">
-          Handmade cups for perfect sips.
+    <div className="relative h-screen w-4/12 bg-white p-4">
+      <div className="absolute inline-flex items-center gap-3">
+        <p className="text-primary font-bonheur text-3xl font-bold italic tracking-normal">
+          HandSip.
         </p>
       </div>
-      <div className="">
-        <p>Welcome back</p>
-        <p>Enter your email to receive a one-time passcode.</p>
-        <input type="email" name="email" id="email" />
-        <div className="">
-          <p>toggle</p>
-          <p>Remember me for 30 days</p>
+
+      <div className="flex h-full w-full flex-col justify-center gap-4 p-14">
+        <p className="form-title">Welcome back</p>
+        <p className="normal-text">
+          Enter your email to receive a one-time passcode.
+        </p>
+
+        <form action="" method="post">
+          <div className="flex w-full flex-col gap-4 py-4">
+            <InputText
+              type={"email"}
+              name={"email"}
+              id={"email"}
+              focus={true}
+            />
+            <div className="inline-flex gap-2">
+              <Toggle toggle={toggle} onHandleToggle={handleToggle} />
+              <p className={toggle ? "semibold-text" : "normal-text"}>
+                Remember me for 30 days
+              </p>
+            </div>
+            <div className="w-full pt-4">
+              <Button type={"submit"} variant={"primary"} text={"Send Code"} />
+            </div>
+          </div>
+        </form>
+
+        <div className="inline-flex w-full items-center gap-2">
+          <div className="divider"></div>
+          <p className="font-playfair pb-1 text-xs text-black">or</p>
+          <div className="divider"></div>
         </div>
-        <button type="submit">Sent code</button>
-        <p>or</p>
-        <div className="">
-          <button>Sign in with Goggle</button>
-          <button>Sign in with Apple ID</button>
+
+        <div className="flex w-full flex-col gap-3 py-4">
+          <Button
+            variant={"outline"}
+            text={"Sign in with Google"}
+            logo={googleLogo}
+          />
+          <Button
+            variant={"outline"}
+            text={"Sign in with Apple ID"}
+            logo={appleLogo}
+          />
         </div>
       </div>
     </div>

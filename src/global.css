@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -6,8 +7,38 @@
   --color-primary: #9c1302;
   --color-secondary: #f0d8a2;
   --color-white: #ffffff;
+  --color-gray: #dfdcdc;
   --color-black: #010100;
 
   --font-*: initial;
   --font-playfair: "Playfair Display", serif;
+  --font-bonheur: "Bonheur Royale", cursive;
+}
+
+.heading-text {
+  @apply font-bonheur text-4xl/16 font-bold tracking-wider;
+}
+
+.form-title {
+  @apply font-playfair text-3xl font-bold text-black;
+}
+
+.normal-text {
+  @apply font-playfair text-[16px] text-black;
+}
+
+.semibold-text {
+  @apply font-playfair text-[16px] font-semibold text-black;
+}
+
+.divider {
+  @apply bg-gray h-px w-full;
+}
+
+.button-primary {
+  @apply bg-primary font-playfair inline-flex w-full cursor-pointer justify-center gap-2 rounded-lg py-2.5 font-semibold tracking-wide text-white;
+}
+
+.button-secondary {
+  @apply font-playfair outline-gray inline-flex cursor-pointer justify-center gap-2 rounded-lg bg-white py-2.5 font-semibold tracking-wide text-black outline-2;
 }

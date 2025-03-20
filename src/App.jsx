@@ -1,12 +1,12 @@
 import "./global.css";
 import EmailForm from "./components/EmailForm";
-import OtpForm from "./components/OtpForm";
+import Hero from "./components/Hero";
 
 function App() {
   return (
     <div className="inline-flex w-screen">
       <EmailForm />
-      <OtpForm />
+      <Hero />
     </div>
   );
 }
