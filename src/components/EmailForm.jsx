@@ -3,12 +3,32 @@ import Button from "./Button";
 import InputText from "./InputText";
 import Toggle from "./Toggle";
 import { useState } from "react";
+import Warning from "./Warning";
+import validator from "validator";
+import { useRef } from "react";
+import { useCallback } from "react";
 
 export default function EmailForm() {
   const [toggle, setToggle] = useState(true);
+  const [warn, setWarn] = useState();
+  const emailRef = useRef();
 
-  function handleToggle() {
-    setToggle(!toggle);
+  const handleToggle = useCallback(() => {
+    setToggle((prev) => !prev);
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+
+    const isValid = validator.isEmail(email);
+    if (!isValid) {
+      setWarn("Please enter a valid email address.");
+      emailRef.current.focus();
+      return;
+    }
+    setWarn("");
   }
 
   return (
@@ -25,14 +45,22 @@ export default function EmailForm() {
           Enter your email to receive a one-time passcode.
         </p>
 
-        <form action="" method="post">
-          <div className="flex w-full flex-col gap-4 py-4">
-            <InputText
-              type={"email"}
-              name={"email"}
-              id={"email"}
-              focus={true}
-            />
+        <form onSubmit={handleSubmit}>
+          <div className="flex w-full flex-col gap-4 pb-4">
+            <div className="w-full">
+              <div className="h-[20px]">
+                <Warning text={warn} />
+              </div>
+              <InputText
+                type={"text"}
+                name={"email"}
+                id={"email"}
+                placeholder={"ex: amelie@email.com"}
+                ref={emailRef}
+                aria-label="Email address"
+              />
+            </div>
+
             <div className="inline-flex gap-2">
               <Toggle toggle={toggle} onHandleToggle={handleToggle} />
               <p className={toggle ? "semibold-text" : "normal-text"}>

@@ -23,6 +23,10 @@
   @apply font-playfair text-3xl font-bold text-black;
 }
 
+.small-text {
+  @apply font-playfair text-primary text-[12px] font-semibold tracking-wider;
+}
+
 .normal-text {
   @apply font-playfair text-[16px] text-black;
 }
