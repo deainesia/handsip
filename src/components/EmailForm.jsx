@@ -1,4 +1,4 @@
-import { appleLogo, googleLogo } from "../utils";
+import { appleLogo, githubLogo, googleLogo } from "../utils";
 import Button from "./Button";
 import InputText from "./InputText";
 import Toggle from "./Toggle";
@@ -37,6 +37,11 @@ export default function EmailForm() {
         <p className="text-primary font-bonheur text-3xl font-bold italic tracking-normal">
           HandSip.
         </p>
+      </div>
+      <div className="absolute bottom-3 right-5 inline-flex items-center gap-2">
+        <a href="https://github.com/deainesia">
+          <img src={githubLogo} alt="Github" width={20} height={20} />
+        </a>
       </div>
 
       <div className="flex h-full w-full flex-col justify-center gap-4 p-14">
