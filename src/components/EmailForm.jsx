@@ -66,6 +66,7 @@ export default function EmailForm() {
                 placeholder={"ex: amelie@email.com"}
                 ref={emailRef}
                 aria-label="Email address"
+                disabled={success ? true : false}
               />
             </div>
 
