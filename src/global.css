@@ -46,3 +46,7 @@
 .button-outline {
   @apply font-playfair outline-gray inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-white py-2.5 font-semibold tracking-wide text-black outline-2;
 }
+
+.button-disable {
+  @apply bg-gray font-playfair inline-flex w-full cursor-default items-center justify-center gap-2 rounded-lg py-2.5 font-semibold tracking-wide text-white;
+}

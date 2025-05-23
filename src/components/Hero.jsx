@@ -7,7 +7,7 @@ export default function Hero() {
   useLayoutEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 10000);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);

@@ -15,5 +15,20 @@ export default function Button({ logo, type, variant, text }) {
     );
   }
 
-  return variant == "primary" ? <PrimaryButton /> : <OutlineButton />;
+  function DisableButton() {
+    return (
+      <button type={type} className="button-disable">
+        {text}
+      </button>
+    );
+  }
+
+  switch (variant) {
+    case "primary":
+      return <PrimaryButton />;
+    case "outline":
+      return <OutlineButton />;
+    case "disable":
+      return <DisableButton />;
+  }
 }

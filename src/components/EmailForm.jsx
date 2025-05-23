@@ -11,6 +11,7 @@ import { useCallback } from "react";
 export default function EmailForm() {
   const [toggle, setToggle] = useState(true);
   const [warn, setWarn] = useState();
+  const [success, setSuccess] = useState(false);
   const emailRef = useRef();
 
   const handleToggle = useCallback(() => {
@@ -26,9 +27,11 @@ export default function EmailForm() {
     if (!isValid) {
       setWarn("Please enter a valid email address.");
       emailRef.current.focus();
+      setSuccess(false);
       return;
     }
     setWarn("");
+    setSuccess(true);
   }
 
   return (
@@ -73,7 +76,11 @@ export default function EmailForm() {
               </p>
             </div>
             <div className="w-full pt-4">
-              <Button type={"submit"} variant={"primary"} text={"Send Code"} />
+              <Button
+                type={"submit"}
+                variant={success ? "disable" : "primary"}
+                text={success ? "Code sent!" : "Send Code"}
+              />
             </div>
           </div>
         </form>
