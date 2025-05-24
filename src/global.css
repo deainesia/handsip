@@ -6,6 +6,7 @@
   --color-*: initial;
   --color-primary: #9c1302;
   --color-secondary: #f0d8a2;
+  --color-success: #238845;
   --color-white: #ffffff;
   --color-gray: #dfdcdc;
   --color-black: #010100;
@@ -20,19 +21,19 @@
 }
 
 .form-title {
-  @apply font-playfair text-3xl font-bold text-black;
+  @apply font-playfair text-3xl font-bold;
+}
+
+.normal-text {
+  @apply font-playfair text-[16px];
+}
+
+.semibold-text {
+  @apply font-playfair text-[16px] font-semibold;
 }
 
 .small-text {
   @apply font-playfair text-primary text-[12px] font-semibold tracking-wider;
-}
-
-.normal-text {
-  @apply font-playfair text-[16px] text-black;
-}
-
-.semibold-text {
-  @apply font-playfair text-[16px] font-semibold text-black;
 }
 
 .divider {

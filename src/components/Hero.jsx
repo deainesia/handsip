@@ -4,6 +4,7 @@ import { useLayoutEffect } from "react";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(1);
+
   useLayoutEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -11,6 +12,7 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <div className="h-screen w-8/12 overflow-hidden">
       {heroSlides.map((item, i) => (
