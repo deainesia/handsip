@@ -4,7 +4,7 @@ export const heroSlides = [
   {
     id: 1,
     text: "Handmade Cups for Perfect Sip",
-    position: "bg-[center_bottom_-8rem]",
+    position: "lg:bg-[center_bottom_-8rem] bg-[center_bottom_-0rem]",
     image: background1,
     credit:
       "https://unsplash.com/photos/a-cup-of-coffee-sitting-on-top-of-a-wooden-table-bh_2A4jUVGE",
@@ -20,7 +20,7 @@ export const heroSlides = [
   {
     id: 3,
     text: "Handcrafted Cups, a Warm Touch in Every Sip",
-    position: "bg-[center_bottom_-8rem]",
+    position: "lg:bg-[center_bottom_-8rem] bg-[center_bottom_-2rem]",
     image: background3,
     credit:
       "https://unsplash.com/photos/a-cup-of-coffee-sitting-on-top-of-a-wooden-table-bh_2A4jUVGE",

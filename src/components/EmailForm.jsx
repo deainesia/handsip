@@ -8,8 +8,13 @@ import validator from "validator";
 import { useRef } from "react";
 import { useCallback } from "react";
 import OtpForm from "./OtpForm";
+import { useMeasureHeight } from "../utils/measure-size";
 
-export default function EmailForm() {
+export default function EmailForm({ heightVal }) {
+  const containerRef = useRef();
+  const height = useMeasureHeight(containerRef);
+  heightVal(height);
+
   const [toggle, setToggle] = useState(true);
   const [warn, setWarn] = useState();
   const [success, setSuccess] = useState(false);
@@ -39,8 +44,8 @@ export default function EmailForm() {
 
   return (
     <>
-      <div className="relative h-screen w-4/12 bg-white p-4">
-        <div className="absolute inline-flex items-center gap-3">
+      <div className="shadow-gray absolute bottom-0 z-10 h-fit w-full rounded-t-2xl bg-white p-4 shadow-2xl lg:h-screen lg:w-4/12">
+        <div className="absolute hidden items-center gap-3">
           <p className="text-primary font-bonheur text-3xl font-bold italic tracking-normal">
             HandSip.
           </p>
@@ -51,14 +56,17 @@ export default function EmailForm() {
           </a>
         </div>
 
-        <div className="flex h-full w-full flex-col justify-center gap-4 p-14">
+        <div
+          className="flex h-full w-full flex-col justify-center gap-2 p-6 lg:gap-4 lg:p-14"
+          ref={containerRef}
+        >
           <p className="form-title text-black">Welcome back</p>
           <p className="normal-text text-black">
             Enter your email to receive a one-time passcode.
           </p>
 
           <form onSubmit={handleSubmit}>
-            <div className="flex w-full flex-col gap-4 pb-4">
+            <div className="flex w-full flex-col gap-2 pb-1 lg:gap-4 lg:pb-4">
               <div className="w-full">
                 <div className="h-[20px]">
                   <Warning text={warn} />
@@ -74,7 +82,7 @@ export default function EmailForm() {
                 />
               </div>
 
-              <div className="inline-flex gap-2">
+              <div className="inline-flex gap-1 lg:gap-2">
                 <Toggle toggle={toggle} onHandleToggle={handleToggle} />
                 <p
                   className={
@@ -86,7 +94,7 @@ export default function EmailForm() {
                   Remember me for 30 days
                 </p>
               </div>
-              <div className="w-full pt-4">
+              <div className="w-full pt-2 lg:pt-4">
                 <Button
                   type={"submit"}
                   variant={success ? "disable" : "primary"}
@@ -102,7 +110,7 @@ export default function EmailForm() {
             <div className="divider"></div>
           </div>
 
-          <div className="flex w-full flex-col gap-3 py-4">
+          <div className="flex w-full flex-col gap-3 py-2 lg:py-4">
             <Button
               variant={"outline"}
               text={"Sign in with Google"}

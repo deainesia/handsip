@@ -10,7 +10,7 @@ export default function Button({ logo, type, variant, text }) {
   function OutlineButton() {
     return (
       <button className="button-outline">
-        <img src={logo} width={20} height={20} /> {text}
+        <img src={logo} className="h-4 w-4 lg:h-5 lg:w-5" /> {text}
       </button>
     );
   }
