@@ -2,42 +2,64 @@ import { useState } from "react";
 import { heroSlides } from "../constant";
 import { useLayoutEffect } from "react";
 import { useRef } from "react";
-import { useMeasureHeight } from "../utils/measure-size";
+import { useMeasureSize } from "../utils/measure-size";
 
-export default function Hero({ height }) {
+export default function Hero({ size }) {
   const [currentSlide, setCurrentSlide] = useState(1);
+
   const containerRef = useRef();
-  const containerHeight = useMeasureHeight(containerRef);
-  const imageHeight = containerHeight - height;
+  const [containerHeight, containerWidth] = useMeasureSize(containerRef);
+  const [formHeight, formWidth] = size;
+
+  const [imageSize, setImageSize] = useState([null, null]);
+  const [imageHeight, imageWidth] = imageSize;
 
   useLayoutEffect(() => {
+    if (containerHeight && formHeight && containerWidth && formWidth) {
+      const calcImageHeight = containerHeight - formHeight + 30;
+      const calcImageWidth = containerWidth - formWidth + 30;
+      setImageSize([calcImageHeight, calcImageWidth]);
+
+      console.log("container height " + containerHeight);
+      console.log("container width " + containerWidth);
+      console.log("form " + formWidth);
+      console.log("calc height " + calcImageHeight);
+      console.log("calc width " + calcImageWidth);
+    }
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [containerHeight, containerWidth, formHeight, formWidth]);
 
   return (
     <div
-      className="absolute top-0 h-screen w-screen overflow-hidden lg:w-8/12"
+      className="absolute top-0 h-screen w-screen overflow-hidden"
       ref={containerRef}
     >
-      {heroSlides.map((item, i) => (
-        <div
-          className={`${i === currentSlide ? "block" : "hidden"} ${item.position} relative h-full w-full bg-cover p-6 lg:p-10`}
-          key={item.id}
-          style={{
-            backgroundImage: `url(${item.image})`,
-            height: `${imageHeight}px`,
-          }}
-        >
-          <div className="heading-text text-secondary absolute">
-            <p className="font-bonheur text-2xl lg:text-5xl">HandSip.</p>
-            <p>{item.text}</p>
+      <div className="absolute lg:right-0">
+        {heroSlides.map((item, i) => (
+          <div
+            className={`${i === currentSlide ? "block" : "hidden"} ${item.position} lg:ps-18 relative bg-cover p-6 lg:pt-10`}
+            key={item.id}
+            style={{
+              backgroundImage: `url(${item.image})`,
+              height:
+                imageHeight && containerHeight
+                  ? `${imageHeight < containerHeight / 4 ? containerHeight : imageHeight}px`
+                  : "auto",
+              width: imageWidth ? `${imageWidth}px` : "100%",
+            }}
+          >
+            <div className="heading-text text-secondary absolute">
+              <p className="font-bonheur text-2xl lg:text-5xl">HandSip.</p>
+              <p>{item.text}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

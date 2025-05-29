@@ -2,13 +2,19 @@ import "./global.css";
 import EmailForm from "./components/EmailForm";
 import Hero from "./components/Hero";
 import { useState } from "react";
+import { useCallback } from "react";
 
 function App() {
-  const [height, setHeight] = useState(null);
+  const [size, setSize] = useState([null, null]);
+
+  const handleRenderSize = useCallback(([height, width]) => {
+    setSize([height, width]);
+  }, []);
+
   return (
     <div className="relative flex h-screen w-screen flex-col-reverse justify-between lg:flex-row">
-      <EmailForm heightVal={(value) => setHeight(value)} />
-      <Hero height={height} />
+      <EmailForm sizeVal={handleRenderSize} />
+      <Hero size={size} />
     </div>
   );
 }

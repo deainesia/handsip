@@ -1,19 +1,21 @@
 import { useLayoutEffect } from "react";
 import { useState } from "react";
 
-export function useMeasureHeight(heightRef) {
-  const [height, setHeight] = useState(null);
+export function useMeasureSize(sizeRef) {
+  const [size, setSize] = useState([null, null]);
+  // eslint-disable-next-line no-unused-vars
+  const [height, width] = size;
+
   useLayoutEffect(() => {
-    const updateHeight = () => {
-      if (heightRef.current) {
-        setHeight(heightRef.current.offsetHeight);
-      }
+    const updateSize = () => {
+      if (sizeRef.current)
+        setSize([sizeRef.current.offsetHeight, sizeRef.current.offsetWidth]);
     };
 
-    updateHeight;
+    updateSize();
 
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [heightRef]);
-  return height;
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [sizeRef]);
+  return size;
 }
