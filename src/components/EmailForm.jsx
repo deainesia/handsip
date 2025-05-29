@@ -50,7 +50,7 @@ export default function EmailForm({ sizeVal }) {
     <>
       <div
         ref={containerRef}
-        className="shadow-gray max-sm:rounded-t-4xl lg:rounded-r-4xl bg-primary absolute bottom-0 z-10 h-fit w-full p-4 shadow-2xl lg:h-screen lg:w-4/12"
+        className="shadow-gray max-sm:rounded-t-4xl lg:rounded-r-4xl absolute bottom-0 z-10 h-fit w-full bg-white p-4 shadow-2xl lg:h-screen lg:w-4/12"
       >
         <div className="absolute items-center gap-3 max-sm:hidden">
           <p className="text-primary font-bonheur text-3xl font-bold italic tracking-normal">

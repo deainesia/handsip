@@ -19,12 +19,6 @@ export default function Hero({ size }) {
       const calcImageHeight = containerHeight - formHeight + 30;
       const calcImageWidth = containerWidth - formWidth + 30;
       setImageSize([calcImageHeight, calcImageWidth]);
-
-      console.log("container height " + containerHeight);
-      console.log("container width " + containerWidth);
-      console.log("form " + formWidth);
-      console.log("calc height " + calcImageHeight);
-      console.log("calc width " + calcImageWidth);
     }
 
     const interval = setInterval(() => {
@@ -50,7 +44,9 @@ export default function Hero({ size }) {
                 imageHeight && containerHeight
                   ? `${imageHeight < containerHeight / 4 ? containerHeight : imageHeight}px`
                   : "auto",
-              width: imageWidth ? `${imageWidth}px` : "100%",
+              width: imageWidth
+                ? `${imageWidth < containerWidth / 4 ? containerWidth : imageWidth}px`
+                : "100%",
             }}
           >
             <div className="heading-text text-secondary absolute">
