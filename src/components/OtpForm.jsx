@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 
-export default function OtpForm({ email, height }) {
+export default function OtpForm({ email, size }) {
   const [success, setSuccess] = useState(false);
   const otp1 = useRef();
   const otp2 = useRef();
   const otp3 = useRef();
   const otp4 = useRef();
+
+  const [height] = size;
 
   useEffect(() => {
     if (otp1.current) {
@@ -17,10 +19,10 @@ export default function OtpForm({ email, height }) {
 
   return (
     <div
-      className="absolute bottom-0 z-10 w-full max-sm:bg-white lg:right-0 lg:h-screen lg:w-8/12 lg:backdrop-brightness-50"
+      className="z-5 absolute bottom-0 w-full max-sm:bg-white lg:h-screen lg:backdrop-brightness-50"
       style={{ height: `${height}px` }}
     >
-      <div className="flex h-full w-full flex-col items-center justify-center">
+      <div className="absolute flex h-full w-8/12 flex-col items-center justify-center lg:right-0">
         <p className="form-title mb-2 text-black lg:text-white">Enter Code</p>
         <p className="normal-text text-black lg:text-white">
           We sent code to <span className="semibold-text">{email}</span>

@@ -57,7 +57,7 @@ export default function EmailForm({ sizeVal }) {
             HandSip.
           </p>
         </div>
-        <div className="absolute bottom-3 right-5 inline-flex items-center gap-2">
+        <div className="absolute bottom-5 right-5 inline-flex items-center gap-2">
           <a href="https://github.com/deainesia">
             <img src={githubLogo} alt="Github" width={20} height={20} />
           </a>
