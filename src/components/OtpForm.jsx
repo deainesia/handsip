@@ -19,10 +19,10 @@ export default function OtpForm({ email, size }) {
 
   return (
     <div
-      className="z-5 absolute bottom-0 w-full max-sm:bg-white lg:h-screen lg:backdrop-brightness-50"
+      className="lg:z-5 max-sm:rounded-t-4xl absolute bottom-0 z-10 w-full max-sm:bg-white lg:h-screen lg:backdrop-brightness-50"
       style={{ height: `${height}px` }}
     >
-      <div className="absolute flex h-full w-8/12 flex-col items-center justify-center lg:right-0">
+      <div className="flex h-full w-full flex-col items-center justify-center lg:absolute lg:right-0 lg:w-8/12">
         <p className="form-title mb-2 text-black lg:text-white">Enter Code</p>
         <p className="normal-text text-black lg:text-white">
           We sent code to <span className="semibold-text">{email}</span>
