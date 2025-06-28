@@ -36,7 +36,7 @@ export default function Hero({ size }) {
       <div className="absolute lg:right-0">
         {heroSlides.map((item, i) => (
           <div
-            className={`${i === currentSlide ? "block" : "hidden"} ${item.position} lg:ps-18 relative bg-cover p-6 lg:pt-10`}
+            className={`${i === currentSlide ? "block" : "hidden"} ${item.position} lg:p-18 relative bg-cover p-6 md:p-8 lg:pt-10`}
             key={item.id}
             style={{
               backgroundImage: `url(${item.image})`,
@@ -49,8 +49,10 @@ export default function Hero({ size }) {
                 : "100%",
             }}
           >
-            <div className="heading-text text-secondary absolute">
-              <p className="font-bonheur text-2xl lg:text-5xl">HandSip.</p>
+            <div className="heading-text text-secondary">
+              <p className="font-bonheur text-2xl md:max-xl:text-4xl xl:text-5xl">
+                HandSip.
+              </p>
               <p>{item.text}</p>
             </div>
           </div>

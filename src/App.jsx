@@ -12,7 +12,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative flex h-screen w-screen flex-col-reverse justify-between lg:flex-row">
+    <div className="relative h-screen w-screen">
       <EmailForm sizeVal={handleRenderSize} />
       <Hero size={size} />
     </div>

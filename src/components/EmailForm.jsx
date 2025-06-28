@@ -50,9 +50,9 @@ export default function EmailForm({ sizeVal }) {
     <>
       <div
         ref={containerRef}
-        className="shadow-gray max-sm:rounded-t-4xl lg:rounded-r-4xl absolute bottom-0 z-10 h-fit w-full bg-white p-4 shadow-2xl lg:h-screen lg:w-4/12"
+        className="shadow-gray max-xl:rounded-t-4xl xl:rounded-r-4xl 2xl:px-15 absolute bottom-0 z-10 h-fit w-full bg-white p-4 shadow-2xl md:max-xl:px-8 xl:h-screen xl:w-4/12 xl:px-10"
       >
-        <div className="absolute items-center gap-3 max-sm:hidden">
+        <div className="absolute hidden items-center gap-3 xl:block">
           <p className="text-primary font-bonheur text-3xl font-bold italic tracking-normal">
             HandSip.
           </p>
@@ -63,7 +63,7 @@ export default function EmailForm({ sizeVal }) {
           </a>
         </div>
 
-        <div className="flex h-full w-full flex-col justify-center gap-2 p-6 lg:gap-4 lg:p-14">
+        <div className="flex h-full w-full flex-col justify-center gap-2 p-6 md:max-xl:px-36 lg:gap-4 xl:p-10">
           <p className="form-title text-black">Welcome back</p>
           <p className="normal-text text-black">
             Enter your email to receive a one-time passcode.
