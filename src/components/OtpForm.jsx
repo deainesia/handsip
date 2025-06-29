@@ -1,20 +1,30 @@
+// import { input } from "motion/react-client";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import Button from "./Button";
 
 export default function OtpForm({ email, size }) {
+  const [otp, setOtp] = useState([...Array(5)]);
+  const inputRefs = useRef([]);
   const [success, setSuccess] = useState(false);
-  const otp1 = useRef();
-  const otp2 = useRef();
-  const otp3 = useRef();
-  const otp4 = useRef();
 
   const [height] = size;
 
-  useEffect(() => {
-    if (otp1.current) {
-      otp1.current.focus();
+  const handleChange = (i, valueInput) => {
+    const result = [...otp];
+    result[i] = valueInput;
+    setOtp(result);
+
+    if (valueInput != "" && i < otp.length - 1) {
+      inputRefs.current[i + 1].focus();
     }
+
+    if (result.every((val) => val != undefined)) setSuccess(true);
+  };
+
+  useEffect(() => {
+    if (inputRefs) inputRefs.current[0].focus();
   }, []);
 
   return (
@@ -28,71 +38,35 @@ export default function OtpForm({ email, size }) {
           We sent code to <span className="semibold-text">{email}</span>
         </p>
         <div className="my-6 flex flex-row gap-4">
-          <input
-            type="text"
-            name="otp-1"
-            className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
-            maxLength={1}
-            style={{ textTransform: "uppercase" }}
-            autoComplete="off"
-            ref={otp1}
-            onChange={(e) => {
-              if (e.target.value.length === 1 && otp2.current)
-                otp2.current.focus();
-            }}
-            disabled={success}
-          />
-          <input
-            type="text"
-            name="otp-2"
-            className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
-            maxLength={1}
-            style={{ textTransform: "uppercase" }}
-            autoComplete="off"
-            ref={otp2}
-            onChange={(e) => {
-              if (e.target.value.length === 1 && otp3.current)
-                otp3.current.focus();
-            }}
-            disabled={success}
-          />
-          <input
-            type="text"
-            name="otp-3"
-            className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
-            maxLength={1}
-            style={{ textTransform: "uppercase" }}
-            autoComplete="off"
-            ref={otp3}
-            onChange={(e) => {
-              if (e.target.value.length === 1 && otp4.current)
-                otp4.current.focus();
-            }}
-            disabled={success}
-          />
-          <input
-            type="text"
-            name="otp-4"
-            className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
-            maxLength={1}
-            style={{ textTransform: "uppercase" }}
-            autoComplete="off"
-            ref={otp4}
-            onChange={(e) => {
-              if (e.target.value.length === 1) setSuccess(true);
-            }}
-            disabled={success}
-          />
+          {otp.map((_, i) => {
+            return (
+              <input
+                key={`otp-${i}`}
+                type="text"
+                className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
+                maxLength={1}
+                style={{ textTransform: "uppercase" }}
+                autoComplete="off"
+                ref={(el) => (inputRefs.current[i] = el)}
+                onChange={(e) => handleChange(i, e.target.value)}
+                disabled={success}
+              />
+            );
+          })}
         </div>
 
-        {!success && (
+        <div className={`${success ? "invisible" : "visible"}`}>
           <p className="normal-text text-black xl:text-white">
             Didn't receive code?{" "}
             <span className="semibold-text cursor-pointer underline">
               Resend
             </span>
           </p>
-        )}
+        </div>
+
+        <div className={`${success ? "visible w-3/12" : "invisible"}`}>
+          <Button variant={"primary"} text={"Back"} />
+        </div>
       </div>
     </div>
   );
