@@ -1,20 +1,13 @@
-import "./styles/global.css";
-import EmailForm from "./components/EmailForm";
-import Hero from "./components/Hero";
-import { useState, useCallback } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Login } from "./pages/Login";
+import { LandingPage } from "./pages/LandingPage";
 
 function App() {
-  const [size, setSize] = useState([null, null]);
-
-  const handleRenderSize = useCallback(([height, width]) => {
-    setSize([height, width]);
-  }, []);
-
   return (
-    <div className="relative h-screen w-screen">
-      <EmailForm sizeVal={handleRenderSize} />
-      <Hero size={size} />
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 

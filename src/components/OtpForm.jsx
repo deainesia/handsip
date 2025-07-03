@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 export default function OtpForm({ email, size }) {
   const [otp, setOtp] = useState([...Array(5)]);
@@ -26,7 +27,7 @@ export default function OtpForm({ email, size }) {
 
   return (
     <div
-      className="xl:z-5 max-xl:rounded-t-4xl absolute bottom-0 z-10 w-full max-xl:bg-white xl:h-screen xl:backdrop-brightness-50"
+      className="absolute bottom-0 z-10 w-full max-xl:rounded-t-4xl max-xl:bg-white xl:z-5 xl:h-screen xl:backdrop-brightness-50"
       style={{ height: `${height}px` }}
     >
       <div className="flex h-full w-full flex-col items-center justify-center xl:absolute xl:right-0 xl:w-8/12">
@@ -40,7 +41,7 @@ export default function OtpForm({ email, size }) {
               <input
                 key={`otp-${i}`}
                 type="text"
-                className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} focus:outline-secondary form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl focus:outline-2 xl:text-white`}
+                className={`${success ? "bg-success/20 text-success outline-success" : "bg-gray text-black outline-gray xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl focus:outline-2 focus:outline-secondary xl:text-white`}
                 maxLength={1}
                 style={{ textTransform: "uppercase" }}
                 autoComplete="off"
@@ -62,7 +63,9 @@ export default function OtpForm({ email, size }) {
         </div>
 
         <div className={`${success ? "visible w-3/12" : "invisible"}`}>
-          <Button variant={"primary"} text={"Back"} />
+          <Link to="/">
+            <Button variant={"primary"} text={"Enter the room"} />
+          </Link>
         </div>
       </div>
     </div>
