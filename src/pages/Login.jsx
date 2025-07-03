@@ -30,26 +30,24 @@ export const Login = () => {
     const email = e.target.email.value;
     const pass = e.target.password.value;
 
-    console.log(email);
-    console.log(pass);
+    if (pass == "") {
+      setPassWarn("Please enter a password.");
+      passRef.current.focus();
+      setSuccess(false);
+    } else {
+      setPassWarn(undefined);
+    }
 
     const isEmailValid = validator.isEmail(email);
     if (!isEmailValid) {
       setEmailWarn("Please enter a valid email address.");
       emailRef.current.focus();
       setSuccess(false);
-    }
-
-    if (pass == "") {
-      setPassWarn("Please enter a password.");
-      passRef.current.focus();
-      setSuccess(false);
+    } else {
+      setEmailWarn(undefined);
     }
 
     if (isEmailValid && pass) {
-      setEmailWarn("");
-      setPassWarn("");
-
       setSuccess(true);
       setEmail(email);
     }
@@ -117,7 +115,7 @@ export const Login = () => {
                   <Button
                     type={"submit"}
                     variant={success ? "disable" : "primary"}
-                    text={success ? "Code sent!" : "Send Code"}
+                    text={success ? "Code sent!" : "Log in"}
                   />
                 </div>
               </div>
