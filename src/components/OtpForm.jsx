@@ -1,7 +1,4 @@
-// import { input } from "motion/react-client";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "./Button";
 
 export default function OtpForm({ email, size }) {
@@ -43,7 +40,7 @@ export default function OtpForm({ email, size }) {
               <input
                 key={`otp-${i}`}
                 type="text"
-                className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl xl:text-white`}
+                className={`${success ? "outline-success text-success bg-success/20" : "outline-gray bg-gray text-black xl:bg-white/20"} focus:outline-secondary form-title h-16 w-14 rounded-xl text-center outline-1 backdrop-blur-2xl focus:outline-2 xl:text-white`}
                 maxLength={1}
                 style={{ textTransform: "uppercase" }}
                 autoComplete="off"

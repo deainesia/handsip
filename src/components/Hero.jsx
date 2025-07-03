@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { heroSlides } from "../constant";
-import { useLayoutEffect } from "react";
-import { useRef } from "react";
-import { useMeasureSize } from "../utils/measure-size";
+import { useState, useLayoutEffect, useRef } from "react";
+import { heroSlides } from "../data/hero";
+import { useMeasureSize } from "../hooks/useMeasureSize";
 
 export default function Hero({ size }) {
   const [currentSlide, setCurrentSlide] = useState(1);
@@ -36,7 +34,7 @@ export default function Hero({ size }) {
       <div className="absolute lg:right-0">
         {heroSlides.map((item, i) => (
           <div
-            className={`${i === currentSlide ? "block" : "hidden"} ${item.position} lg:p-18 relative bg-cover p-6 md:p-8 lg:pt-10`}
+            className={`${i === currentSlide ? "block" : "hidden"} ${item.position} relative bg-cover p-6 md:p-8 lg:p-18 lg:pt-10`}
             key={item.id}
             style={{
               backgroundImage: `url(${item.image})`,

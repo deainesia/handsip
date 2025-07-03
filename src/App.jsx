@@ -1,8 +1,7 @@
-import "./global.css";
+import "./styles/global.css";
 import EmailForm from "./components/EmailForm";
 import Hero from "./components/Hero";
-import { useState } from "react";
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 
 function App() {
   const [size, setSize] = useState([null, null]);

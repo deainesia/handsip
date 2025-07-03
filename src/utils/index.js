@@ -1,15 +1,15 @@
-import google from "/assets/images/google.webp";
-import apple from "/assets/images/apple.png";
-import github from "/assets/images/github.svg";
+import google from "/google.webp";
+import apple from "/apple.png";
+import github from "/github.svg";
 
-import bg1 from "/assets/images/background1.jpg";
-import bg2 from "/assets/images/background2.jpg";
-import bg3 from "/assets/images/background3.jpg";
+import hero1 from "../assets/hero1.jpg";
+import hero2 from "../assets/hero2.jpg";
+import hero3 from "../assets/hero3.jpg";
 
 export const googleLogo = google;
 export const appleLogo = apple;
 export const githubLogo = github;
 
-export const background1 = bg1;
-export const background2 = bg2;
-export const background3 = bg3;
+export const heroImage1 = hero1;
+export const heroImage2 = hero2;
+export const heroImage3 = hero3;

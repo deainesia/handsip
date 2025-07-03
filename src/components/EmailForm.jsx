@@ -2,14 +2,11 @@ import { appleLogo, githubLogo, googleLogo } from "../utils";
 import Button from "./Button";
 import InputText from "./InputText";
 import Toggle from "./Toggle";
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Warning from "./Warning";
 import validator from "validator";
-import { useRef } from "react";
-import { useCallback } from "react";
 import OtpForm from "./OtpForm";
-import { useMeasureSize } from "../utils/measure-size";
-import { useEffect } from "react";
+import { useMeasureSize } from "../hooks/useMeasureSize";
 
 export default function EmailForm({ sizeVal }) {
   const containerRef = useRef();
