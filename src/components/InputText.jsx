@@ -12,7 +12,7 @@ const InputText = forwardRef(
           name={name}
           id={id}
           placeholder={placeholder}
-          className={`w-full rounded-lg bg-white p-2 font-playfair text-sm text-black outline-2 focus:outline-primary lg:p-2.5`}
+          className={`w-full rounded-lg bg-white p-2 font-playfair text-sm text-black outline-2 lg:p-2.5`}
           style={{ outlineColor: warn !== undefined ? "#9c1302" : "#dfdcdc" }}
           ref={ref}
           disabled={disabled}

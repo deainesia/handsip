@@ -66,7 +66,7 @@ export default function OtpForm({ email, size }) {
         </div>
 
         <div className={`${success ? "visible w-4/12" : "invisible"}`}>
-          <Link to="/">
+          <Link to="/dashboard">
             <Button variant={"primary"} text={"Enter & Enjoy"} />
           </Link>
         </div>
