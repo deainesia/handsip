@@ -6,6 +6,11 @@
   --color-*: initial;
   --color-primary: #9c1302;
   --color-secondary: #f0d8a2;
+  --color-secondary-500: #f3dfb2;
+  --color-secondary-400: #f5e5c1;
+  --color-secondary-300: #f8ecd1;
+  --color-secondary-200: #faf2e0;
+  --color-secondary-100: #fcf7ec;
   --color-success: #238845;
   --color-white: #ffffff;
   --color-gray: #dfdcdc;
@@ -16,12 +21,20 @@
   --font-bonheur: "Bonheur Royale", cursive;
 }
 
-.heading-text {
-  @apply font-bonheur text-xl font-bold tracking-wider md:max-lg:text-3xl/16 lg:text-4xl/16;
+.brand-text {
+  @apply font-bonheur text-3xl tracking-wider italic 2xl:text-4xl;
+}
+
+.headline-text {
+  @apply font-playfair text-[64px] leading-25 font-bold;
 }
 
 .form-title {
   @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-3xl;
+}
+
+.title-small {
+  @apply font-playfair text-base md:text-xl;
 }
 
 .normal-text {

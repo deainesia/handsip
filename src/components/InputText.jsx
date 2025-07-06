@@ -14,6 +14,7 @@ const InputText = forwardRef(
           placeholder={placeholder}
           className={`w-full rounded-lg bg-white p-2 font-playfair text-sm text-black outline-2 lg:p-2.5`}
           style={{ outlineColor: warn !== undefined ? "#9c1302" : "#dfdcdc" }}
+          autoComplete={type == "password" ? "current-password" : "email"}
           ref={ref}
           disabled={disabled}
         />

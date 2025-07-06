@@ -60,9 +60,7 @@ export const Login = () => {
         className="absolute bottom-0 z-10 h-fit w-full bg-white p-4 shadow-2xl shadow-gray max-xl:rounded-t-4xl xl:h-screen xl:w-4/12 xl:rounded-r-4xl"
       >
         <div className="absolute hidden items-center gap-3 xl:block">
-          <p className="font-bonheur text-3xl font-bold tracking-normal text-primary italic 2xl:text-4xl">
-            HandSip.
-          </p>
+          <p className="brand-text text-primary">HandSip.</p>
         </div>
         <div className="absolute right-5 bottom-4 inline-flex items-center gap-2">
           <a href="https://github.com/deainesia">
