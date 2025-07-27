@@ -15,6 +15,9 @@
   --color-white: #ffffff;
   --color-gray: #dfdcdc;
   --color-black: #010100;
+  --color-black-500: #2b2b2b;
+  --color-black-400: #565655;
+  --color-black-300: #808080;
 
   --font-*: initial;
   --font-playfair: "Playfair Display", serif;
@@ -31,6 +34,10 @@
 
 .form-title {
   @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-3xl;
+}
+
+.title-large {
+  @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-4xl;
 }
 
 .title-small {

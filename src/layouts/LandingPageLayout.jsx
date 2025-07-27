@@ -4,12 +4,10 @@ import { NavBar } from "../components/NavBar";
 
 export const LandingPageLayout = () => {
   return (
-    <div>
+    <>
       <NavBar />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
       <Footer />
-    </div>
+    </>
   );
 };
