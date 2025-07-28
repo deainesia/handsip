@@ -69,7 +69,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="best-seller" className="px-30 py-20">
+      <section id="best-seller" className="px-30 py-26">
         <div className="relative mb-4 w-full">
           <p className="title-large text-center">Best Seller Cups</p>
 
@@ -166,7 +166,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="perfect-pairings" className="px-30 py-20">
+      <section id="perfect-pairings" className="px-30 py-26">
         <div className="relative mb-4 w-full">
           <p className="title-large text-center">Perfect Pairings</p>
 
@@ -202,7 +202,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="cust-story" className="" ref={imgStory}>
+      <section id="cust-story" ref={imgStory}>
         {custStory.map((item) => (
           <div
             className={
@@ -286,7 +286,7 @@ export const Home = () => {
         ))}
       </section>
 
-      <section id="find-the-one" className="px-30 py-20">
+      <section id="find-the-one" className="px-30 py-26">
         <div className="relative mb-4 w-full">
           <p className="title-large text-center">Find The One That Fits </p>
 
