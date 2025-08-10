@@ -37,7 +37,7 @@
 }
 
 .title-large {
-  @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-4xl;
+  @apply font-playfair font-bold lg:text-4xl;
 }
 
 .title-small {

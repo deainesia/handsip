@@ -20,10 +20,14 @@ export const heroImage3 = hero3;
 import heroHome1 from "../assets/hero-home-1.jpg";
 import heroHome2 from "../assets/hero-home-2.jpg";
 import heroHome3 from "../assets/hero-home-3.jpg";
+import heroHome4 from "../assets/hero-home-4.jpg";
+import heroHome5 from "../assets/hero-home-5.jpg";
 
 export const heroImageHome1 = heroHome1;
 export const heroImageHome2 = heroHome2;
 export const heroImageHome3 = heroHome3;
+export const heroImageHome4 = heroHome4;
+export const heroImageHome5 = heroHome5;
 
 // best seller cups
 import bestSeller1 from "../assets/best-seller-1.jpg";

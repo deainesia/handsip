@@ -32,7 +32,7 @@ export const Home = () => {
           <span className="w-2/6 bg-secondary-300"></span>
           <span className="w-2/6 bg-secondary-400"></span>
         </div>
-        <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 ps-30 pr-16">
+        <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 pr-16 lg:ps-20 xl:ps-30">
           <p className="headline-text">Sip the Warmth, Feel the Craft.</p>
           <span className="">
             <p className="title-small font-bold">
@@ -69,38 +69,8 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="best-seller" className="px-30 py-26">
-        <div className="relative mb-4 w-full">
-          <p className="title-large text-center">Best Seller Cups</p>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="absolute top-0 right-0 size-10 text-black hover:text-primary"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </div>
-        <div className="flex flex-row gap-4">
-          {bestseller.map((item) => (
-            <Card
-              key={item.id}
-              img={item.img}
-              position={item.position}
-              title={item.title}
-              volume={item.volume}
-              price={item.price}
-              disc={item.disc}
-            />
-          ))}
-        </div>
+      <section id="best-seller">
+        <Card title={"Best Seller Cups"} data={bestseller} />
       </section>
 
       <section id="highlight" className="relative flex w-full flex-row">
@@ -125,7 +95,7 @@ export const Home = () => {
             isn’t rushed, it waits with you patiently for the next sip.
           </p>
 
-          <span className="gap-2">
+          <span>
             <p className="title-small font-bold">Quiet Pour</p>
             <p className="title-small font-bold text-success">$ 10.00</p>
           </span>
@@ -166,40 +136,8 @@ export const Home = () => {
         </div>
       </section>
 
-      <section id="perfect-pairings" className="px-30 py-26">
-        <div className="relative mb-4 w-full">
-          <p className="title-large text-center">Perfect Pairings</p>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="absolute top-0 right-0 size-10 text-black hover:text-primary"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </div>
-        <div className="flex flex-row gap-4">
-          {perfectPairings.map((item) => (
-            <Card
-              key={item.id}
-              img={item.img}
-              position={item.position}
-              title={item.title}
-              set={item.set}
-              volume={item.volume}
-              teapot={item.teapot}
-              price={item.price}
-              disc={item.disc}
-            />
-          ))}
-        </div>
+      <section id="perfect-pairings">
+        <Card title={"Perfect Pairings"} data={perfectPairings} />
       </section>
 
       <section id="cust-story" ref={imgStory}>
@@ -286,38 +224,8 @@ export const Home = () => {
         ))}
       </section>
 
-      <section id="find-the-one" className="px-30 py-26">
-        <div className="relative mb-4 w-full">
-          <p className="title-large text-center">Find The One That Fits </p>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="absolute top-0 right-0 size-10 text-black hover:text-primary"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </div>
-        <div className="flex flex-row gap-4">
-          {findTheOne.map((item) => (
-            <Card
-              key={item.id}
-              img={item.img}
-              position={item.position}
-              title={item.title}
-              volume={item.volume}
-              price={item.price}
-              disc={item.disc}
-            />
-          ))}
-        </div>
+      <section id="find-the-one">
+        <Card title={"Find The One That Fits"} data={findTheOne} />
       </section>
     </main>
   );
