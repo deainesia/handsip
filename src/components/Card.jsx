@@ -6,7 +6,7 @@ export const Card = ({ title, data }) => {
   const [_, imgWidth] = useMeasureSize(imgRef);
 
   return (
-    <div className="p-30">
+    <div className="xl:px-20 xl:py-26 2xl:p-30">
       <div className="relative mb-4 w-full">
         <p className="title-large text-center">{title}</p>
 
@@ -16,7 +16,7 @@ export const Card = ({ title, data }) => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="absolute top-0 right-0 size-10 text-black hover:text-primary"
+          className="absolute right-0 text-black hover:text-primary xl:top-1.5 xl:size-9 2xl:top-0 2xl:size-10"
         >
           <path
             strokeLinecap="round"

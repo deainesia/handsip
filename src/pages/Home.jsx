@@ -33,7 +33,10 @@ export const Home = () => {
           <span className="w-2/6 bg-secondary-400"></span>
         </div>
         <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 pr-16 lg:ps-20 xl:ps-30">
-          <p className="headline-text">Sip the Warmth, Feel the Craft.</p>
+          <p className="headline-text">
+            Sip the Warmth,
+            <br /> Feel the Craft.
+          </p>
           <span className="">
             <p className="title-small font-bold">
               We believe a cup is more than just a vessel.
@@ -60,9 +63,7 @@ export const Home = () => {
               <img
                 src={item.image}
                 key={item.id}
-                height={400}
-                width={300}
-                className="z-5 mb-2 rounded-lg"
+                className="z-5 mb-2 rounded-lg xl:h-[330px] xl:w-[264px] 2xl:h-[400px] 2xl:w-[320px]"
               />
             );
           })}
@@ -82,23 +83,21 @@ export const Home = () => {
         </div>
 
         <div className="z-5 flex w-6/12 justify-end">
-          <img src={highlightImage} className="w-5/6 object-cover" />
+          <img
+            src={highlightImage}
+            className="object-cover xl:size-full xl:ps-20 2xl:w-5/6"
+          />
         </div>
 
-        <div className="z-5 flex w-6/12 flex-col justify-between py-20 ps-10 pe-30">
+        <div className="z-5 flex w-6/12 flex-col justify-between ps-10 xl:py-18 xl:pe-20 2xl:py-20 2xl:pe-30">
           <p className="form-title text-primary italic">
             This Month's Highlight:
           </p>
           <p className="title-large">For Your Quietest Coffee Moments</p>
           <p className="title-small">
             For the gentle souls who let the world soften for a while. This cup
-            isn’t rushed, it waits with you patiently for the next sip.
+            isn't rushed, it waits with you patiently for the next sip.
           </p>
-
-          <span>
-            <p className="title-small font-bold">Quiet Pour</p>
-            <p className="title-small font-bold text-success">$ 10.00</p>
-          </span>
 
           <span className="flex flex-row gap-15">
             <span className="flex flex-col items-start">
@@ -109,6 +108,11 @@ export const Home = () => {
               <p className="title-small text-black-400 italic">Material</p>
               <p className="title-small text-black">Stoneware Ceramic</p>
             </span>
+          </span>
+
+          <span>
+            <p className="title-small font-bold">Quiet Pour</p>
+            <p className="title-small font-bold text-success">$ 10.00</p>
           </span>
 
           <span className="flex flex-row items-center gap-2">
@@ -149,7 +153,7 @@ export const Home = () => {
             key={item.id}
           >
             <div
-              className="relative flex h-[680px] w-6/12 flex-col justify-between overflow-hidden py-20 ps-30 pe-16"
+              className="relative flex w-6/12 flex-col justify-between overflow-hidden xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
               style={{ backgroundColor: `#${item.color}` }}
             >
               <svg
@@ -172,11 +176,11 @@ export const Home = () => {
                 From Their Table to Ours:
               </p>
               <p className="title-large z-5">{item.title}</p>
-              <span className="title-small z-5 flex flex-col gap-4">
-                {item.story.map((story) => (
-                  <p key={story}>{story}</p>
-                ))}
-              </span>
+              {item.story.map((story) => (
+                <p key={story} className="title-small z-5">
+                  {story}
+                </p>
+              ))}
 
               <span className="title-small z-5 flex flex-row items-center gap-1">
                 <p className="font-bold">—{item.name},</p>
@@ -197,10 +201,11 @@ export const Home = () => {
                 </svg>
               </span>
             </div>
-            <div className="flex w-6/12 flex-row items-center gap-2 pe-15">
+
+            <div className="flex w-6/12 flex-row items-center gap-2 xl:pe-2 2xl:pe-13">
               <img
                 src={item.image}
-                style={{ height: `${((width / 2) * 75) / 100}px` }}
+                style={{ height: `${((width / 2) * 80) / 100}px` }}
                 className="w-5/6 rounded-r-lg object-cover"
               />
 

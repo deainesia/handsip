@@ -29,15 +29,15 @@
 }
 
 .headline-text {
-  @apply font-playfair text-[64px] leading-25 font-bold;
+  @apply font-playfair font-bold xl:text-5xl/20 2xl:text-[64px]/25;
 }
 
 .form-title {
-  @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-3xl;
+  @apply font-playfair text-xl font-bold md:max-lg:text-2xl xl:text-3xl;
 }
 
 .title-large {
-  @apply font-playfair font-bold lg:text-4xl;
+  @apply font-playfair font-bold xl:text-[32px] 2xl:text-4xl;
 }
 
 .title-small {

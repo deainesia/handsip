@@ -7,7 +7,7 @@ export const Footer = () => {
   return (
     <footer className="flex w-full flex-col">
       <div className="flex flex-row bg-secondary-200">
-        <div className="flex flex-col gap-2 px-30 py-10">
+        <div className="flex flex-col gap-2 py-10 xl:px-20 2xl:px-30">
           <p className="brand-text text-primary">HandSip</p>
           <p className="normal-text">
             Homegrown handmade cup brand that brings warmth to every sip.
@@ -28,7 +28,7 @@ export const Footer = () => {
           </span>
         </div>
 
-        <div className="flex w-8/12 flex-row justify-between pe-30">
+        <div className="flex w-8/12 flex-row justify-between xl:pe-20 2xl:pe-30">
           {footer.map((item) => (
             <div className="flex flex-col gap-2 py-10">
               <p className="normal-text text-primary" key={item.id}>
