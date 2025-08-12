@@ -102,7 +102,7 @@ export const Login = () => {
                   <p
                     className={
                       toggle
-                        ? "semibold-text text-black"
+                        ? "normal-text font-semibold text-black"
                         : "normal-text text-black"
                     }
                   >

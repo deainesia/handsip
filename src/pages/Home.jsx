@@ -13,7 +13,7 @@ import { findTheOne } from "../data/findTheOne";
 
 export const Home = () => {
   const imgStory = useRef();
-  const [_, width] = useMeasureSize(imgStory);
+  const [height, _] = useMeasureSize(imgStory);
 
   const [storyDisplay, setStoryDisplay] = useState(1);
   const handleNextStory = () => {
@@ -32,24 +32,24 @@ export const Home = () => {
           <span className="w-2/6 bg-secondary-300"></span>
           <span className="w-2/6 bg-secondary-400"></span>
         </div>
-        <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 pr-16 lg:ps-20 xl:ps-30">
+        <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 lg:ps-14 lg:pr-10 xl:ps-20 xl:pr-16 2xl:ps-30">
           <p className="headline-text">
             Sip the Warmth,
             <br /> Feel the Craft.
           </p>
           <span className="">
-            <p className="title-small font-bold">
+            <p className="normal-text font-bold">
               We believe a cup is more than just a vessel.
             </p>
-            <p className="title-small">
+            <p className="normal-text">
               It's a morning companion, a quiet partner in conversation, a
               bringer of warmth. At HandSip, every cup is handcrafted slowly,
               mindfully, and never quite the same.
             </p>
           </span>
 
-          <div className="flex w-full flex-row items-center justify-between rounded-lg bg-white/50 px-3 py-2 backdrop-blur-sm">
-            <p className="title-small text-primary">
+          <div className="flex w-full flex-row items-center justify-between gap-4 rounded-lg bg-white/50 px-3 py-2 backdrop-blur-sm">
+            <p className="normal-text text-primary">
               First Cup, First Love - Enjoy 15% Off
             </p>
             <span className="w-fit">
@@ -63,7 +63,7 @@ export const Home = () => {
               <img
                 src={item.image}
                 key={item.id}
-                className="z-5 mb-2 rounded-lg xl:h-[330px] xl:w-[264px] 2xl:h-[400px] 2xl:w-[320px]"
+                className="z-5 mb-2 rounded-lg lg:h-[330px] lg:w-[264px] 2xl:h-[400px] 2xl:w-[320px]"
               />
             );
           })}
@@ -75,44 +75,44 @@ export const Home = () => {
       </section>
 
       <section id="highlight" className="relative flex w-full flex-row">
-        <div className="absolute flex h-full w-full flex-row">
+        <div className="absolute top-0 flex h-full w-full flex-row">
           <span className="w-6/6 bg-secondary-500"></span>
           <span className="w-2/6 bg-secondary-400"></span>
           <span className="w-2/6 bg-secondary-300"></span>
           <span className="w-2/6 bg-secondary-200"></span>
         </div>
 
-        <div className="z-5 flex w-6/12 justify-end">
+        <div className="z-5 flex w-6/12 justify-end bg-secondary-500 lg:max-xl:py-10">
           <img
             src={highlightImage}
-            className="object-cover xl:size-full xl:ps-20 2xl:w-5/6"
+            className="object-cover lg:size-fit xl:ps-20 2xl:w-5/6"
           />
         </div>
 
-        <div className="z-5 flex w-6/12 flex-col justify-between ps-10 xl:py-18 xl:pe-20 2xl:py-20 2xl:pe-30">
+        <div className="z-5 flex w-6/12 flex-col justify-between ps-10 lg:py-10 lg:ps-7 lg:pe-14 xl:py-18 xl:pe-20 2xl:py-20 2xl:pe-30">
           <p className="form-title text-primary italic">
             This Month's Highlight:
           </p>
           <p className="title-large">For Your Quietest Coffee Moments</p>
-          <p className="title-small">
+          <p className="normal-text">
             For the gentle souls who let the world soften for a while. This cup
             isn't rushed, it waits with you patiently for the next sip.
           </p>
 
           <span className="flex flex-row gap-15">
             <span className="flex flex-col items-start">
-              <p className="title-small text-black-400 italic">Volume</p>
-              <p className="title-small text-black">280 ml</p>
+              <p className="normal-text text-black-400 italic">Volume</p>
+              <p className="normal-text text-black">280 ml</p>
             </span>
             <span className="flex flex-col items-start">
-              <p className="title-small text-black-400 italic">Material</p>
-              <p className="title-small text-black">Stoneware Ceramic</p>
+              <p className="normal-text text-black-400 italic">Material</p>
+              <p className="normal-text text-black">Stoneware Ceramic</p>
             </span>
           </span>
 
           <span>
-            <p className="title-small font-bold">Quiet Pour</p>
-            <p className="title-small font-bold text-success">$ 10.00</p>
+            <p className="normal-text font-bold">Quiet Pour</p>
+            <p className="normal-text font-bold text-success">$ 10.00</p>
           </span>
 
           <span className="flex flex-row items-center gap-2">
@@ -148,18 +148,20 @@ export const Home = () => {
         {custStory.map((item) => (
           <div
             className={
-              storyDisplay == item.id ? "flex flex-row items-center" : "hidden"
+              storyDisplay == item.id
+                ? "flex flex-row items-center justify-between"
+                : "hidden"
             }
             key={item.id}
           >
             <div
-              className="relative flex w-6/12 flex-col justify-between overflow-hidden xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
+              className="relative flex w-6/12 flex-col justify-between overflow-hidden lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
               style={{ backgroundColor: `#${item.color}` }}
             >
               <svg
-                viewBox="0 0 400 400"
+                viewBox="0 0 200 200"
                 xmlns="http://www.w3.org/2000/svg"
-                className="absolute inset-0 isolate mix-blend-multiply"
+                className="absolute inset-0 isolate size-[800px] mix-blend-multiply"
               >
                 <filter id="noiseFilter">
                   <feTurbulence
@@ -177,12 +179,12 @@ export const Home = () => {
               </p>
               <p className="title-large z-5">{item.title}</p>
               {item.story.map((story) => (
-                <p key={story} className="title-small z-5">
+                <p key={story} className="normal-text z-5">
                   {story}
                 </p>
               ))}
 
-              <span className="title-small z-5 flex flex-row items-center gap-1">
+              <span className="normal-text z-5 flex flex-row items-center gap-1">
                 <p className="font-bold">—{item.name},</p>
                 <p className="font-bold">{item.city}</p>
                 <p>with</p>
@@ -202,12 +204,14 @@ export const Home = () => {
               </span>
             </div>
 
-            <div className="flex w-6/12 flex-row items-center gap-2 xl:pe-2 2xl:pe-13">
-              <img
-                src={item.image}
-                style={{ height: `${((width / 2) * 80) / 100}px` }}
-                className="w-5/6 rounded-r-lg object-cover"
-              />
+            <div className="flex w-6/12 flex-row items-center gap-1 lg:pe-14 xl:pe-20 2xl:pe-30">
+              <div className="size-full">
+                <img
+                  src={item.image}
+                  style={{ height: `${(height * 85) / 100}px` }}
+                  className="w-full rounded-r-lg object-cover"
+                />
+              </div>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"

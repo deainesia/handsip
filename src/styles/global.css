@@ -29,27 +29,19 @@
 }
 
 .headline-text {
-  @apply font-playfair font-bold xl:text-5xl/20 2xl:text-[64px]/25;
+  @apply font-playfair font-bold lg:text-5xl/20 2xl:text-[64px]/25;
 }
 
 .form-title {
-  @apply font-playfair text-xl font-bold md:max-lg:text-2xl xl:text-3xl;
+  @apply font-playfair text-xl font-bold md:max-lg:text-2xl lg:text-3xl;
 }
 
 .title-large {
-  @apply font-playfair font-bold xl:text-[32px] 2xl:text-4xl;
-}
-
-.title-small {
-  @apply font-playfair text-base md:text-xl;
+  @apply font-playfair font-bold lg:text-[32px] 2xl:text-4xl;
 }
 
 .normal-text {
-  @apply font-playfair text-sm md:text-base;
-}
-
-.semibold-text {
-  @apply font-playfair text-sm font-semibold md:text-base;
+  @apply font-playfair text-sm md:text-base lg:text-xl;
 }
 
 .small-text {

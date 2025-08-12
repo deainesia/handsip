@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 import { footer } from "../data/footer";
 import { instaIcon, tiktokIcon, twitterIcon, youtubeIcon } from "../utils";
@@ -6,31 +5,40 @@ import { instaIcon, tiktokIcon, twitterIcon, youtubeIcon } from "../utils";
 export const Footer = () => {
   return (
     <footer className="flex w-full flex-col">
-      <div className="flex flex-row bg-secondary-200">
-        <div className="flex flex-col gap-2 py-10 xl:px-20 2xl:px-30">
-          <p className="brand-text text-primary">HandSip</p>
-          <p className="normal-text">
-            Homegrown handmade cup brand that brings warmth to every sip.
-          </p>
-          <p className="semibold-text">Stay in touch with warm things.</p>
-          <div className="flex w-full flex-row items-center justify-between rounded-lg bg-white px-3 py-2">
-            <p className="normal-text text-primary">Ex: emily@email.com</p>
-            <span className="w-fit">
-              <Button variant={"primary"} text={"Subscribe"} />
+      <div className="flex flex-col-reverse bg-secondary-200 xl:flex-row">
+        <div className="flex flex-row gap-2 py-5 lg:px-14 xl:flex-col xl:px-20 xl:py-10 2xl:px-30">
+          <span className="flex flex-col gap-2 max-xl:w-6/12">
+            <p className="brand-text text-primary">HandSip</p>
+            <p className="normal-text">
+              Homegrown handmade cup brand that brings warmth to every sip.
+            </p>
+          </span>
+
+          <span className="flex flex-col gap-2 max-xl:w-6/12">
+            <p className="normal-text font-semibold">
+              Stay in touch with warm things.
+            </p>
+            <div className="flex w-full flex-row items-center justify-between rounded-lg bg-white px-3 py-2">
+              <p className="normal-text text-primary">Ex: emily@email.com</p>
+              <span className="w-fit">
+                <Button variant={"primary"} text={"Subscribe"} />
+              </span>
+            </div>
+            <span className="flex flex-col gap-2">
+              <p className="normal-text font-semibold">Follow Us</p>
+              <span className="flex flex-row gap-3">
+                <img src={instaIcon} className="size-6" />
+                <img src={tiktokIcon} className="size-6" />
+                <img src={twitterIcon} className="size-6" />
+                <img src={youtubeIcon} className="size-6" />
+              </span>
             </span>
-          </div>
-          <p className="semibold-text">Follow Us</p>
-          <span className="flex flex-row gap-2">
-            <img src={instaIcon} className="size-6" />
-            <img src={tiktokIcon} className="size-6" />
-            <img src={twitterIcon} className="size-6" />
-            <img src={youtubeIcon} className="size-6" />
           </span>
         </div>
 
-        <div className="flex w-8/12 flex-row justify-between xl:pe-20 2xl:pe-30">
+        <div className="flex flex-row justify-center max-xl:bg-secondary-100 lg:gap-20 lg:max-xl:px-14 xl:w-10/12 xl:justify-between xl:gap-0 xl:pe-20 2xl:gap-20 2xl:pe-30">
           {footer.map((item) => (
-            <div className="flex flex-col gap-2 py-10">
+            <div className="flex flex-col gap-2 py-5 xl:py-10">
               <p className="normal-text text-primary" key={item.id}>
                 {item.title}
               </p>

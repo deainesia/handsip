@@ -36,7 +36,8 @@ export default function OtpForm({ email, size }) {
           One more step to sip something special.
         </p>
         <p className="normal-text text-center text-black xl:text-white">
-          We sent code to <span className="semibold-text">{email}</span>
+          We sent code to{" "}
+          <span className="normal-text font-semibold">{email}</span>
         </p>
         <div className="my-6 flex flex-row gap-2 md:gap-4">
           {otp.map((_, i) => {
@@ -59,7 +60,7 @@ export default function OtpForm({ email, size }) {
         <div className={`${success ? "invisible" : "visible"}`}>
           <p className="normal-text text-black xl:text-white">
             Didn't receive code?{" "}
-            <span className="semibold-text cursor-pointer underline">
+            <span className="normal-text cursor-pointer font-semibold underline">
               Resend
             </span>
           </p>
