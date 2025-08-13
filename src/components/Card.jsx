@@ -6,7 +6,7 @@ export const Card = ({ title, data }) => {
   const [_, imgWidth] = useMeasureSize(imgRef);
 
   return (
-    <div className="lg:px-14 lg:py-26 xl:px-20 xl:py-26 2xl:p-30">
+    <div className="md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:p-30">
       <div className="relative mb-4 w-full">
         <p className="title-large text-center">{title}</p>
 
@@ -17,7 +17,7 @@ export const Card = ({ title, data }) => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="text-black hover:text-primary lg:size-9 2xl:size-10"
+            className="text-black hover:text-primary md:size-8 lg:size-9 2xl:size-10"
           >
             <path
               strokeLinecap="round"
@@ -27,9 +27,9 @@ export const Card = ({ title, data }) => {
           </svg>
         </span>
       </div>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-3 lg:gap-4">
         {data.map((item) => (
-          <div className="relative flex-1" ref={imgRef}>
+          <div className="relative flex-1" ref={imgRef} key={item.id}>
             <img
               src={item.img}
               className={`${item.position} mb-1 w-full rounded-lg object-cover`}

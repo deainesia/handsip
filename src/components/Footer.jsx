@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <footer className="flex w-full flex-col">
       <div className="flex flex-col-reverse bg-secondary-200 xl:flex-row">
-        <div className="flex flex-row gap-2 py-5 lg:px-14 xl:flex-col xl:px-20 xl:py-10 2xl:px-30">
+        <div className="flex flex-row gap-2 py-5 md:px-10 md:max-xl:gap-8 lg:px-14 xl:flex-col xl:px-20 xl:py-10 2xl:px-30">
           <span className="flex flex-col gap-2 max-xl:w-6/12">
             <p className="brand-text text-primary">HandSip</p>
             <p className="normal-text">
@@ -18,7 +18,7 @@ export const Footer = () => {
             <p className="normal-text font-semibold">
               Stay in touch with warm things.
             </p>
-            <div className="flex w-full flex-row items-center justify-between rounded-lg bg-white px-3 py-2">
+            <div className="flex w-full flex-row items-center justify-between rounded-lg bg-white p-2 lg:px-3">
               <p className="normal-text text-primary">Ex: emily@email.com</p>
               <span className="w-fit">
                 <Button variant={"primary"} text={"Subscribe"} />
@@ -36,12 +36,13 @@ export const Footer = () => {
           </span>
         </div>
 
-        <div className="flex flex-row justify-center max-xl:bg-secondary-100 lg:gap-20 lg:max-xl:px-14 xl:w-10/12 xl:justify-between xl:gap-0 xl:pe-20 2xl:gap-20 2xl:pe-30">
+        <div className="flex flex-row justify-center max-xl:bg-secondary-100 md:gap-20 md:max-lg:px-10 lg:max-xl:px-14 xl:w-10/12 xl:justify-between xl:gap-0 xl:pe-20 2xl:gap-20 2xl:pe-30">
           {footer.map((item) => (
-            <div className="flex flex-col gap-2 py-5 xl:py-10">
-              <p className="normal-text text-primary" key={item.id}>
-                {item.title}
-              </p>
+            <div
+              className="flex flex-col gap-1.5 py-5 lg:gap-2 xl:py-10"
+              key={item.id}
+            >
+              <p className="normal-text text-primary">{item.title}</p>
               {item.menu.map((menu) => (
                 <p className="normal-text" key={menu}>
                   {menu}

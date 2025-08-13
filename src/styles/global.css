@@ -25,11 +25,11 @@
 }
 
 .brand-text {
-  @apply font-bonheur text-3xl tracking-wider italic 2xl:text-4xl;
+  @apply font-bonheur text-3xl lg:text-4xl;
 }
 
 .headline-text {
-  @apply font-playfair font-bold lg:text-5xl/20 2xl:text-[64px]/25;
+  @apply font-playfair font-bold md:text-[40px]/16 lg:text-5xl/20 2xl:text-[64px]/25;
 }
 
 .form-title {
@@ -37,7 +37,7 @@
 }
 
 .title-large {
-  @apply font-playfair font-bold lg:text-[32px] 2xl:text-4xl;
+  @apply font-playfair font-bold md:text-[28px] lg:text-[32px] 2xl:text-4xl;
 }
 
 .normal-text {

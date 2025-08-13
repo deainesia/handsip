@@ -13,7 +13,10 @@ import { findTheOne } from "../data/findTheOne";
 
 export const Home = () => {
   const imgStory = useRef();
-  const [height, _] = useMeasureSize(imgStory);
+  const imgHero = useRef();
+
+  const [heightImgStory] = useMeasureSize(imgStory);
+  const [heightImgHero, widthImgHero] = useMeasureSize(imgHero);
 
   const [storyDisplay, setStoryDisplay] = useState(1);
   const handleNextStory = () => {
@@ -32,13 +35,16 @@ export const Home = () => {
           <span className="w-2/6 bg-secondary-300"></span>
           <span className="w-2/6 bg-secondary-400"></span>
         </div>
-        <div className="z-5 flex h-full w-6/12 flex-col justify-center gap-8 lg:ps-14 lg:pr-10 xl:ps-20 xl:pr-16 2xl:ps-30">
+        <div
+          ref={imgHero}
+          className="z-5 flex h-full w-6/12 flex-col justify-center gap-6 md:ps-10 md:pr-8 lg:gap-8 lg:ps-14 xl:ps-20 xl:pr-16 2xl:ps-30"
+        >
           <p className="headline-text">
             Sip the Warmth,
             <br /> Feel the Craft.
           </p>
           <span className="">
-            <p className="normal-text font-bold">
+            <p className="normal-text font-semibold">
               We believe a cup is more than just a vessel.
             </p>
             <p className="normal-text">
@@ -63,7 +69,20 @@ export const Home = () => {
               <img
                 src={item.image}
                 key={item.id}
-                className="z-5 mb-2 rounded-lg lg:h-[330px] lg:w-[264px] 2xl:h-[400px] 2xl:w-[320px]"
+                style={
+                  widthImgHero >= 600
+                    ? {
+                        height: (widthImgHero * 60) / 100,
+                        width: (heightImgHero * 40) / 100,
+                        objectFit: "cover",
+                      }
+                    : {
+                        height: (widthImgHero * 70) / 100,
+                        width: (heightImgHero * 20) / 100,
+                        objectFit: "cover",
+                      }
+                }
+                className="z-5 mb-2 rounded-lg"
               />
             );
           })}
@@ -82,14 +101,14 @@ export const Home = () => {
           <span className="w-2/6 bg-secondary-200"></span>
         </div>
 
-        <div className="z-5 flex w-6/12 justify-end bg-secondary-500 lg:max-xl:py-10">
+        <div className="z-5 flex w-6/12 justify-end bg-secondary-500 md:max-xl:py-10">
           <img
             src={highlightImage}
-            className="object-cover lg:size-fit xl:ps-20 2xl:w-5/6"
+            className="size-fit object-cover xl:max-2xl:ps-20 2xl:w-5/6"
           />
         </div>
 
-        <div className="z-5 flex w-6/12 flex-col justify-between ps-10 lg:py-10 lg:ps-7 lg:pe-14 xl:py-18 xl:pe-20 2xl:py-20 2xl:pe-30">
+        <div className="z-5 flex w-6/12 flex-col justify-center gap-2 md:py-6 md:ps-5 md:pe-10 lg:justify-between lg:py-10 lg:ps-7 lg:pe-14 xl:py-18 xl:ps-10 xl:pe-20 2xl:py-20 2xl:pe-30">
           <p className="form-title text-primary italic">
             This Month's Highlight:
           </p>
@@ -99,7 +118,7 @@ export const Home = () => {
             isn't rushed, it waits with you patiently for the next sip.
           </p>
 
-          <span className="flex flex-row gap-15">
+          <span className="flex flex-row gap-12 lg:gap-15">
             <span className="flex flex-col items-start">
               <p className="normal-text text-black-400 italic">Volume</p>
               <p className="normal-text text-black">280 ml</p>
@@ -115,24 +134,7 @@ export const Home = () => {
             <p className="normal-text font-bold text-success">$ 10.00</p>
           </span>
 
-          <span className="flex flex-row items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"
-                clipRule="evenodd"
-              />
-            </svg>
-
-            <Tag title={"Classic"} />
-            <Tag title={"Clean Look"} />
-            <Tag title={"Ivory White"} />
-          </span>
+          <Tag title={["Classic", "Clean Look", "White Ivory"]} />
 
           <span className="w-fit">
             <Button variant={"primary"} text={"Meet the cup"} />
@@ -155,7 +157,7 @@ export const Home = () => {
             key={item.id}
           >
             <div
-              className="relative flex w-6/12 flex-col justify-between overflow-hidden lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
+              className="relative flex w-6/12 flex-col justify-between overflow-hidden md:h-[580px] md:py-12 md:ps-10 md:pe-7 lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
               style={{ backgroundColor: `#${item.color}` }}
             >
               <svg
@@ -193,7 +195,7 @@ export const Home = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="z-5 size-5 text-primary"
+                  className="z-5 size-4 text-primary lg:size-5"
                 >
                   <path
                     fillRule="evenodd"
@@ -204,11 +206,11 @@ export const Home = () => {
               </span>
             </div>
 
-            <div className="flex w-6/12 flex-row items-center gap-1 lg:pe-14 xl:pe-20 2xl:pe-30">
+            <div className="flex w-6/12 flex-row items-center gap-0.5 md:pe-10 lg:pe-14 xl:pe-20 2xl:pe-30">
               <div className="size-full">
                 <img
                   src={item.image}
-                  style={{ height: `${(height * 85) / 100}px` }}
+                  style={{ height: `${(heightImgStory * 85) / 100}px` }}
                   className="w-full rounded-r-lg object-cover"
                 />
               </div>
@@ -219,7 +221,7 @@ export const Home = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-10"
+                className="size-8 lg:size-10"
                 onClick={handleNextStory}
               >
                 <path
