@@ -6,11 +6,11 @@ export const Card = ({ title, data }) => {
   const [_, imgWidth] = useMeasureSize(imgRef);
 
   return (
-    <div className="md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:p-30">
+    <div className="px-5 py-18 md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:p-30">
       <div className="relative mb-4 w-full">
         <p className="title-large text-center">{title}</p>
 
-        <span className="absolute top-0 right-0 flex h-full items-center">
+        <span className="absolute top-0 right-0 flex h-full items-center max-md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -27,7 +27,7 @@ export const Card = ({ title, data }) => {
           </svg>
         </span>
       </div>
-      <div className="flex flex-row gap-3 lg:gap-4">
+      <div className="grid grid-cols-2 grid-rows-3 gap-4 md:flex md:flex-row md:gap-3 lg:gap-4">
         {data.map((item) => (
           <div className="relative flex-1" ref={imgRef} key={item.id}>
             <img
@@ -72,6 +72,26 @@ export const Card = ({ title, data }) => {
             )}
           </div>
         ))}
+        <div
+          className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-secondary-100 md:hidden"
+          style={{ height: `${imgWidth}px` }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-6 rounded-full bg-white p-1 text-black"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+            />
+          </svg>
+          <p className="normal-text font-semibold">Show All</p>
+        </div>
       </div>
     </div>
   );

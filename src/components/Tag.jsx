@@ -1,8 +1,4 @@
-import { useState } from "react";
-import { useLayoutEffect } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
-import Button from "./Button";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 
 export const Tag = ({ title }) => {
   const tagScroll = useRef();
@@ -26,7 +22,7 @@ export const Tag = ({ title }) => {
   }, [tag]);
 
   return (
-    <>
+    <div className="flex flex-col gap-1">
       <span
         className="flex flex-row items-center gap-1 overflow-auto lg:gap-2"
         ref={tagScroll}
@@ -35,7 +31,7 @@ export const Tag = ({ title }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="size-6 shrink-0"
+          className="z-5 size-6 shrink-0"
         >
           <path
             fillRule="evenodd"
@@ -63,7 +59,7 @@ export const Tag = ({ title }) => {
       </span>
 
       {showAll && (
-        <span className="mx-[26px] my-1 flex flex-row flex-wrap items-center gap-1 lg:gap-2">
+        <span className="mx-[26px] flex flex-row flex-wrap items-center gap-1 lg:gap-2">
           {title
             .filter((item) => !tag.includes(item))
             .map((item) => (
@@ -83,6 +79,6 @@ export const Tag = ({ title }) => {
           </button>
         </span>
       )}
-    </>
+    </div>
   );
 };

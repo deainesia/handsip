@@ -29,7 +29,7 @@
 }
 
 .headline-text {
-  @apply font-playfair font-bold md:text-[40px]/16 lg:text-5xl/20 2xl:text-[64px]/25;
+  @apply font-playfair text-4xl/15 font-bold md:text-[40px]/16 lg:text-5xl/20 2xl:text-[64px]/25;
 }
 
 .form-title {
@@ -37,11 +37,11 @@
 }
 
 .title-large {
-  @apply font-playfair font-bold md:text-[28px] lg:text-[32px] 2xl:text-4xl;
+  @apply font-playfair text-2xl font-bold md:text-[28px] lg:text-[32px] 2xl:text-4xl;
 }
 
 .normal-text {
-  @apply font-playfair text-sm md:text-base lg:text-xl;
+  @apply font-playfair text-base lg:text-xl;
 }
 
 .small-text {
