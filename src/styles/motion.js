@@ -1,10 +1,14 @@
 import {
   useSpring,
+  useSprings,
   easings,
   useTrail,
   useSpringRef,
   useChain,
 } from "@react-spring/web";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 export const useMoveToRight = (ref, from, to) => {
   return useSpring({
@@ -53,6 +57,47 @@ export const useScaleOut = (ref) => {
     to: { transform: "scale(1)", opacity: 1 },
     config: { tension: 200, friction: 26 },
   });
+};
+
+export const useCardMotion = () => {
+  const refContainer = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  const [titleCardStyle, titleCardApi] = useSpring(() => ({
+    opacity: 0,
+    y: 50,
+    config: { tension: 300, friction: 20 },
+  }));
+
+  const [cardStyle, cardApi] = useSprings(5, () => ({
+    opacity: 0,
+    y: 50,
+    scale: 0.1,
+    config: { duration: 500, tension: 300, friction: 20 },
+  }));
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          titleCardApi.start({ opacity: 1, y: 0 });
+          cardApi.start((i) => ({
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            delay: i * 200,
+          }));
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (refContainer.current) observer.observe(refContainer.current);
+    return () => observer.disconnect();
+  }, [titleCardApi, cardApi, hasAnimated]);
+
+  return { refContainer, titleCardStyle, cardStyle };
 };
 
 export const useHeadlineText = (letter1, letter2) => {
