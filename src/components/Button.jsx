@@ -3,7 +3,7 @@ export default function Button({ logo, type, variant, text }) {
     return (
       <button
         type={type}
-        className="normal-text inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-primary px-3 py-2 font-playfair tracking-wide text-white lg:px-4"
+        className="normal-text inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-primary px-3 py-2 font-playfair tracking-wide text-white duration-[.5s] ease-in-out hover:bg-primary-600 lg:px-4"
       >
         <p>{text}</p>
       </button>

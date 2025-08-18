@@ -5,6 +5,7 @@
 @theme {
   --color-*: initial;
   --color-primary: #9c1302;
+  --color-primary-600: #821002;
   --color-secondary: #f0d8a2;
   --color-secondary-500: #f3dfb2;
   --color-secondary-400: #f5e5c1;

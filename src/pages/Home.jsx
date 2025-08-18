@@ -6,9 +6,12 @@ import { bestseller } from "../data/bestSeller";
 import { custStory } from "../data/custStory";
 import { heroImageHome } from "../data/heroImageHome";
 import { perfectPairings } from "../data/perfectPairings";
+import { findTheOne } from "../data/findTheOne";
 import { highlightImage } from "../utils";
 import { useMeasureSize } from "../hooks/useMeasureSize";
-import { findTheOne } from "../data/findTheOne";
+// eslint-disable-next-line no-unused-vars
+import { animated } from "@react-spring/web";
+import { useBgHeadline, useHeadlineText } from "../styles/motion";
 
 export const Home = () => {
   const containerRef = useRef();
@@ -27,6 +30,31 @@ export const Home = () => {
     storyDisplay == 1 ? setStoryDisplay(3) : setStoryDisplay(storyDisplay - 1);
   };
 
+  const text1 = "Sip the Warmth,";
+  const letter1 = text1.split("");
+  const text2 = "Feel the Craft.";
+  const letter2 = text2.split("");
+
+  const heroImages = [...heroImageHome, ...heroImageHome];
+
+  // motion
+  const {
+    headlineText1,
+    headlineText2,
+    headlineText3,
+    headlineText4,
+    headlineText5,
+  } = useHeadlineText(letter1, letter2);
+
+  const {
+    bgHeadline1,
+    bgHeadline2,
+    bgHeadline3,
+    bgHeadline4,
+    imgHeadline5,
+    imgHeadline6,
+  } = useBgHeadline(widthContainer);
+
   return (
     <main ref={containerRef}>
       <section
@@ -35,37 +63,66 @@ export const Home = () => {
       >
         {!isMobile && (
           <div className="absolute flex h-full w-full flex-row">
-            <span className="w-6/6 bg-secondary-100"></span>
-            <span className="w-2/6 bg-secondary-200"></span>
-            <span className="w-2/6 bg-secondary-300"></span>
-            <span className="w-2/6 bg-secondary-400"></span>
+            <animated.span
+              style={bgHeadline1}
+              className="bg-secondary-100"
+            ></animated.span>
+            <animated.span
+              style={bgHeadline2}
+              className="bg-secondary-200"
+            ></animated.span>
+            <animated.span
+              style={bgHeadline3}
+              className="bg-secondary-300"
+            ></animated.span>
+            <animated.span
+              style={bgHeadline4}
+              className="bg-secondary-400"
+            ></animated.span>
           </div>
         )}
 
         <div className="z-5 flex h-full w-full flex-col justify-center gap-6 px-5 md:w-6/12 md:ps-10 md:pr-8 lg:gap-8 lg:ps-14 xl:ps-20 xl:pr-16 2xl:ps-30">
-          <p className="headline-text">
-            Sip the Warmth,
-            <br /> Feel the Craft.
-          </p>
-          <span className="">
-            <p className="normal-text font-semibold">
+          <span>
+            {headlineText1.map((style, i) => (
+              <animated.span className="headline-text" key={i} style={style}>
+                {letter1[i]}
+              </animated.span>
+            ))}
+            <br />
+
+            {headlineText2.map((style, i) => (
+              <animated.span className="headline-text" key={i} style={style}>
+                {letter2[i]}
+              </animated.span>
+            ))}
+          </span>
+
+          <span>
+            <animated.p
+              style={headlineText3}
+              className="normal-text font-semibold"
+            >
               We believe a cup is more than just a vessel.
-            </p>
-            <p className="normal-text">
+            </animated.p>
+            <animated.p style={headlineText4} className="normal-text">
               It's a morning companion, a quiet partner in conversation, a
               bringer of warmth. At HandSip, every cup is handcrafted slowly,
               mindfully, and never quite the same.
-            </p>
+            </animated.p>
           </span>
 
-          <div className="flex w-full flex-row items-center justify-between gap-4 rounded-lg bg-white/50 px-3 py-2 backdrop-blur-sm">
+          <animated.div
+            style={headlineText5}
+            className="flex w-full flex-row items-center justify-between gap-4 rounded-lg bg-white/50 px-3 py-2 backdrop-blur-sm"
+          >
             <p className="normal-text text-primary">
               First Cup, First Love - Enjoy 15% Off
             </p>
             <span className="w-fit">
               <Button variant={"primary"} text={"Claim"} />
             </span>
-          </div>
+          </animated.div>
         </div>
         <div className="flex h-fit flex-row items-center max-md:relative max-md:py-4 md:w-6/12 md:flex-col">
           {isMobile && (
@@ -76,13 +133,15 @@ export const Home = () => {
             </div>
           )}
 
-          {heroImageHome.map((item) => {
+          {heroImages.map((item, i) => {
             return (
-              <img
+              <animated.img
                 src={item.image}
-                key={item.id}
-                style={
-                  isMobile
+                key={i}
+                style={{
+                  ...imgHeadline5,
+                  ...imgHeadline6,
+                  ...(isMobile
                     ? {
                         height: widthContainer * 0.6,
                         width: heightContainer * 0.3,
@@ -98,8 +157,8 @@ export const Home = () => {
                           height: heightContainer / 10,
                           width: widthContainer / 5,
                           objectFit: "cover",
-                        }
-                }
+                        }),
+                }}
                 className="z-5 rounded-lg max-md:mr-2 md:mb-2"
               />
             );
