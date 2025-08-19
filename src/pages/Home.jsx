@@ -14,7 +14,8 @@ import { animated } from "@react-spring/web";
 import {
   useBgHeadline,
   useHeadlineText,
-  useHomeMotion,
+  useHighlightMotion,
+  useStoryMotion,
 } from "../styles/motion";
 
 export const Home = () => {
@@ -27,6 +28,7 @@ export const Home = () => {
   const isMobile = widthContainer < 750;
 
   const [storyDisplay, setStoryDisplay] = useState(1);
+  const storyById = custStory.find((item) => item.id === storyDisplay);
   const handleNextStory = () => {
     storyDisplay == 3 ? setStoryDisplay(1) : setStoryDisplay(storyDisplay + 1);
   };
@@ -68,7 +70,15 @@ export const Home = () => {
     imgHiglightStyle,
     textHighlightStyle,
     buttonHighlightStyle,
-  } = useHomeMotion();
+  } = useHighlightMotion();
+
+  const {
+    refContainerStory,
+    textStoryStyle,
+    titleStoryStyle,
+    creditStoryStyle,
+    imgStoryStyle,
+  } = useStoryMotion(storyById, storyDisplay);
 
   return (
     <main ref={containerRef}>
@@ -300,147 +310,155 @@ export const Home = () => {
         <Card title={"Perfect Pairings"} data={perfectPairings} />
       </section>
 
-      <section id="cust-story" ref={imgStory}>
-        {custStory.map((item) => (
-          <div
-            className={
-              storyDisplay == item.id
-                ? "flex flex-col-reverse items-center justify-between md:flex-row"
-                : "hidden"
-            }
-            key={item.id}
+      <section
+        id="cust-story"
+        ref={(el) => {
+          imgStory.current = el;
+          refContainerStory.current = el;
+        }}
+      >
+        <animated.div
+          className="flex flex-col-reverse items-center justify-between md:flex-row"
+          key={storyById.id}
+        >
+          <animated.div
+            className="relative z-5 flex flex-col overflow-hidden px-5 py-7 max-md:gap-4 md:h-[580px] md:w-6/12 md:justify-between md:py-12 md:ps-10 md:pe-7 lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
+            style={{ backgroundColor: `#${storyById.color}` }}
           >
-            <div
-              className="relative flex flex-col overflow-hidden px-5 py-7 max-md:gap-4 md:h-[580px] md:w-6/12 md:justify-between md:py-12 md:ps-10 md:pe-7 lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"
-              style={{ backgroundColor: `#${item.color}` }}
+            <svg
+              viewBox="0 0 200 200"
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute inset-0 isolate size-[800px] mix-blend-multiply"
             >
-              <svg
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute inset-0 isolate size-[800px] mix-blend-multiply"
-              >
-                <filter id="noiseFilter">
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="9.00"
-                    numOctaves="1"
-                    stitchTiles="stitch"
-                  />
-                </filter>
-
-                <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-              </svg>
-              <p className="form-title z-5 text-primary italic">
-                From Their Table to Ours:
-              </p>
-              <p className="title-large z-5">{item.title}</p>
-              {item.story.map((story) => (
-                <p key={story} className="normal-text z-5">
-                  {story}
-                </p>
-              ))}
-
-              <span className="normal-text z-5 flex flex-row items-center gap-1">
-                <p className="font-semibold">—{item.name},</p>
-                <p className="font-semibold">{item.city}</p>
-                <p>with</p>
-                <p className="font-semibold text-primary">{item.cup}</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="z-5 size-4 text-primary lg:size-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </div>
-
-            <div className="relative w-full overflow-hidden md:flex md:w-6/12 md:flex-row md:items-center md:gap-0.5 md:pe-10 lg:pe-14 xl:pe-20 2xl:pe-30">
-              {isMobile && (
-                <>
-                  <span
-                    className="absolute inset-0 top-2/12 -z-1"
-                    style={{ backgroundColor: `#${item.color}` }}
-                  ></span>
-
-                  <svg
-                    viewBox="0 0 200 200"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute inset-0 top-2/12 isolate -z-1 size-[800px] mix-blend-multiply"
-                  >
-                    <filter id="noiseFilter">
-                      <feTurbulence
-                        type="fractalNoise"
-                        baseFrequency="9.00"
-                        numOctaves="1"
-                        stitchTiles="stitch"
-                      />
-                    </filter>
-
-                    <rect
-                      width="100%"
-                      height="100%"
-                      filter="url(#noiseFilter)"
-                    />
-                  </svg>
-                </>
-              )}
-
-              <div className="h-full w-full max-md:px-5">
-                <img
-                  src={item.image}
-                  style={
-                    widthImgStory > 750
-                      ? { height: (heightImgStory * 85) / 100 }
-                      : { height: widthImgStory - 40 }
-                  }
-                  className="w-full object-cover max-md:rounded-lg md:rounded-r-lg"
+              <filter id="noiseFilter">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="9.00"
+                  numOctaves="1"
+                  stitchTiles="stitch"
                 />
-              </div>
+              </filter>
 
-              {isMobile && (
+              <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+            </svg>
+            <p className="form-title z-5 text-primary italic">
+              From Their Table to Ours:
+            </p>
+            <animated.p style={titleStoryStyle} className="title-large z-5">
+              {storyById.title}
+            </animated.p>
+            {storyById.story.map((story, i) => (
+              <animated.p
+                style={textStoryStyle[i]}
+                key={story}
+                className="normal-text z-5"
+              >
+                {story}
+              </animated.p>
+            ))}
+
+            <animated.span
+              style={creditStoryStyle}
+              className="normal-text z-5 flex flex-row items-center gap-1"
+            >
+              <p className="font-semibold">—{storyById.name},</p>
+              <p className="font-semibold">{storyById.city}</p>
+              <p>with</p>
+              <p className="font-semibold text-primary">{storyById.cup}</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="z-5 size-4 text-primary lg:size-5"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </animated.span>
+          </animated.div>
+
+          <div className="relative w-full overflow-hidden md:flex md:w-6/12 md:flex-row md:items-center md:gap-0.5 md:pe-10 lg:pe-14 xl:pe-20 2xl:pe-30">
+            {isMobile && (
+              <>
+                <span
+                  className="absolute inset-0 top-2/12 -z-1"
+                  style={{ backgroundColor: `#${storyById.color}` }}
+                ></span>
+
                 <svg
+                  viewBox="0 0 200 200"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="absolute left-0 ms-5 size-8 text-white"
-                  style={{ top: (widthImgStory - 56) / 2 }}
-                  onClick={handlePrevStory}
+                  className="absolute inset-0 top-2/12 isolate -z-1 size-[800px] mix-blend-multiply"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
-              )}
+                  <filter id="noiseFilter">
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="9.00"
+                      numOctaves="1"
+                      stitchTiles="stitch"
+                    />
+                  </filter>
 
+                  <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+                </svg>
+              </>
+            )}
+
+            <animated.div
+              style={imgStoryStyle}
+              className="h-full w-full max-md:px-5"
+            >
+              <img
+                src={storyById.image}
+                style={
+                  widthImgStory > 750
+                    ? { height: (heightImgStory * 85) / 100 }
+                    : { height: widthImgStory - 40 }
+                }
+                className="w-full object-cover max-md:rounded-lg md:rounded-r-lg"
+              />
+            </animated.div>
+
+            {isMobile && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-8 text-white max-md:absolute max-md:right-0 max-md:me-5 md:text-black lg:size-10"
-                style={isMobile ? { top: (widthImgStory - 56) / 2 } : {}}
-                onClick={handleNextStory}
+                className="absolute left-0 ms-5 size-8 text-white"
+                style={{ top: (widthImgStory - 56) / 2 }}
+                onClick={handlePrevStory}
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
                 />
               </svg>
-            </div>
+            )}
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-8 text-white max-md:absolute max-md:right-0 max-md:me-5 md:text-black lg:size-10"
+              style={isMobile ? { top: (widthImgStory - 56) / 2 } : {}}
+              onClick={handleNextStory}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              />
+            </svg>
           </div>
-        ))}
+        </animated.div>
       </section>
 
       <section id="find-the-one">
