@@ -13,7 +13,7 @@ export const Card = ({ title, data }) => {
   return (
     <div
       ref={refContainer}
-      className="px-5 py-18 md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:p-30"
+      className="px-5 py-18 md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:px-40 2xl:py-30"
     >
       <div className="relative mb-4 w-full">
         <animated.p style={titleCardStyle} className="title-large text-center">

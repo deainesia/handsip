@@ -11,7 +11,11 @@ import { highlightImage } from "../utils";
 import { useMeasureSize } from "../hooks/useMeasureSize";
 // eslint-disable-next-line no-unused-vars
 import { animated } from "@react-spring/web";
-import { useBgHeadline, useHeadlineText } from "../styles/motion";
+import {
+  useBgHeadline,
+  useHeadlineText,
+  useHomeMotion,
+} from "../styles/motion";
 
 export const Home = () => {
   const containerRef = useRef();
@@ -54,6 +58,17 @@ export const Home = () => {
     imgHeadline5,
     imgHeadline6,
   } = useBgHeadline(widthContainer);
+
+  const {
+    refContainerHighlight,
+    bgHiglight1Style,
+    bgHiglight2Style,
+    bgHiglight3Style,
+    bgHiglight4Style,
+    imgHiglightStyle,
+    textHighlightStyle,
+    buttonHighlightStyle,
+  } = useHomeMotion();
 
   return (
     <main ref={containerRef}>
@@ -172,19 +187,33 @@ export const Home = () => {
 
       <section
         id="highlight"
+        ref={refContainerHighlight}
         className="relative flex w-full flex-col max-md:bg-secondary-500 max-md:pt-7 md:flex-row"
       >
         {!isMobile && (
           <div className="absolute top-0 flex h-full w-full flex-row">
-            <span className="w-6/6 bg-secondary-500"></span>
-            <span className="w-2/6 bg-secondary-400"></span>
-            <span className="w-2/6 bg-secondary-300"></span>
-            <span className="w-2/6 bg-secondary-200"></span>
+            <animated.span
+              style={bgHiglight1Style}
+              className="w-6/6 bg-secondary-500"
+            ></animated.span>
+            <animated.span
+              style={bgHiglight2Style}
+              className="w-2/6 bg-secondary-400"
+            ></animated.span>
+            <animated.span
+              style={bgHiglight3Style}
+              className="w-2/6 bg-secondary-300"
+            ></animated.span>
+            <animated.span
+              style={bgHiglight4Style}
+              className="w-2/6 bg-secondary-200"
+            ></animated.span>
           </div>
         )}
 
         <div className="z-5 flex justify-end bg-secondary-500 md:w-6/12 md:max-xl:py-10">
-          <img
+          <animated.img
+            style={imgHiglightStyle}
             src={highlightImage}
             className="size-fit object-cover xl:max-2xl:ps-20 2xl:w-5/6"
           />
@@ -199,36 +228,71 @@ export const Home = () => {
             </div>
           )}
 
-          <p className="form-title z-5 text-primary italic">
+          <animated.p
+            style={textHighlightStyle}
+            className="form-title z-5 text-primary italic"
+          >
             This Month's Highlight:
-          </p>
-          <p className="title-large z-5">For Your Quietest Coffee Moments</p>
-          <p className="normal-text z-5">
+          </animated.p>
+          <animated.p style={textHighlightStyle} className="title-large z-5">
+            For Your Quietest Coffee Moments
+          </animated.p>
+          <animated.p style={textHighlightStyle} className="normal-text z-5">
             For the gentle souls who let the world soften for a while. This cup
             isn't rushed, it waits with you patiently for the next sip.
-          </p>
+          </animated.p>
 
           <span className="z-5 flex flex-row gap-12 lg:gap-15">
             <span className="flex flex-col items-start">
-              <p className="normal-text text-black-400 italic">Volume</p>
-              <p className="normal-text text-black">280 ml</p>
+              <animated.p
+                style={textHighlightStyle}
+                className="normal-text text-black-400 italic"
+              >
+                Volume
+              </animated.p>
+              <animated.p
+                style={textHighlightStyle}
+                className="normal-text text-black"
+              >
+                280 ml
+              </animated.p>
             </span>
             <span className="flex flex-col items-start">
-              <p className="normal-text text-black-400 italic">Material</p>
-              <p className="normal-text text-black">Stoneware Ceramic</p>
+              <animated.p
+                style={textHighlightStyle}
+                className="normal-text text-black-400 italic"
+              >
+                Material
+              </animated.p>
+              <animated.p
+                style={textHighlightStyle}
+                className="normal-text text-black"
+              >
+                Stoneware Ceramic
+              </animated.p>
             </span>
           </span>
 
           <span className="z-5">
-            <p className="normal-text font-bold">Quiet Pour</p>
-            <p className="normal-text font-bold text-success">$ 10.00</p>
+            <animated.p
+              style={textHighlightStyle}
+              className="normal-text font-bold"
+            >
+              Quiet Pour
+            </animated.p>
+            <animated.p
+              style={textHighlightStyle}
+              className="normal-text font-bold text-success"
+            >
+              $ 10.00
+            </animated.p>
           </span>
 
           <Tag title={["Classic", "Clean Look", "White Ivory"]} />
 
-          <span className="z-5 w-fit">
+          <animated.span className="z-5 w-fit" style={buttonHighlightStyle}>
             <Button variant={"primary"} text={"Meet the cup"} />
-          </span>
+          </animated.span>
         </div>
       </section>
 
