@@ -5,10 +5,9 @@ import {
   useTrail,
   useSpringRef,
   useChain,
+  useTransition,
 } from "@react-spring/web";
-import { useState } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 const useMoveToRight = (ref, from, to) => {
   return useSpring({
@@ -19,21 +18,20 @@ const useMoveToRight = (ref, from, to) => {
   });
 };
 
-const useImageCarousel = (ref) => {
+const useMoveToTop = (ref) => {
   return useSpring({
     ref: ref,
-    from: { transform: "translateY(0%)" },
-    to: { transform: "translateY(-500%)" },
-    config: { duration: 50000, easing: (t) => t },
-    loop: true,
+    from: { x: 1000 },
+    to: { x: 0 },
+    config: { duration: 1000, easing: easings.easeInExpo },
   });
 };
 
-const useFadeIn = (ref) => {
+export const useFadeIn = (ref, y) => {
   return useSpring({
     ref: ref,
-    from: { opacity: 0 },
-    to: { opacity: 1 },
+    from: { opacity: 0, y: y },
+    to: { opacity: 1, y: 0 },
     config: {
       tension: 300,
       friction: 40,
@@ -59,20 +57,46 @@ const useScaleOut = (ref) => {
   });
 };
 
-const useImgHighlightStyle = () => {
-  return useSpring(() => ({
-    opacity: 0,
-    x: -50,
-    config: { tension: 300, friction: 40 },
-  }));
+const useImageCarousel = (ref) => {
+  return useSpring({
+    ref: ref,
+    from: { transform: "translateY(0%)" },
+    to: { transform: "translateY(-50%)" },
+    config: { duration: 50000, easing: (t) => t },
+    loop: true,
+  });
 };
 
-const useTextFadeInStyle = (y) => {
-  return useSpring(() => ({
-    opacity: 0,
-    y: y,
-    config: { tension: 300, friction: 30 },
-  }));
+const useImageCarouselMobile = (ref) => {
+  return useSpring({
+    ref: ref,
+    from: { transform: "translateX(0%)" },
+    to: { transform: "translateX(-50%)" },
+    config: { duration: 50000, easing: (t) => t },
+    loop: true,
+  });
+};
+
+export const useNavbar = (showMenu) => {
+  const transitions = useTransition(showMenu, {
+    from: { height: 0, opacity: 0 },
+    enter: { height: 36, opacity: 1 },
+    leave: { height: 0, opacity: 0 },
+  });
+
+  return { transitions };
+};
+
+export const useFooter = (showMenu) => {
+  const transitions = useSpring({
+    from: { opacity: 0, y: 0 },
+    to: {
+      opacity: showMenu ? 1 : 0,
+      y: showMenu ? 0 : -20,
+    },
+  });
+
+  return { transitions };
 };
 
 export const useHeadlineText = (letter1, letter2) => {
@@ -88,7 +112,7 @@ export const useHeadlineText = (letter1, letter2) => {
   const headlineText4 = useFadeIn(ref4, 0);
   const headlineText5 = useScaleOut(ref5);
 
-  useChain([ref1, ref2, ref3, ref4, ref5], [0, 0, 1, 1.5, 1.9], 1000);
+  useChain([ref1, ref2, ref3, ref4, ref5], [0, 0, 0.5, 1, 1.5], 1000);
 
   return {
     headlineText1,
@@ -130,103 +154,99 @@ export const useBgHeadline = (width) => {
   };
 };
 
-export const useCardMotion = () => {
-  const refContainer = useRef(null);
+export const useBgHeadlineMobile = () => {
+  const ref1 = useSpringRef();
+  const ref2 = useSpringRef();
+  const ref3 = useSpringRef();
+  const ref4 = useSpringRef();
+  const ref5 = useSpringRef();
+  const ref6 = useSpringRef();
 
-  const [titleCardStyle, titleCardApi] = useTextFadeInStyle(50);
+  const bgHeadline1Mobile = useFadeIn(ref1);
+  const bgHeadline2Mobile = useMoveToTop(ref2);
+  const bgHeadline3Mobile = useMoveToTop(ref3);
+  const bgHeadline4Mobile = useMoveToTop(ref4);
+  const imgHeadline5Mobile = useFadeIn(ref5);
+  const imgHeadline6Mobile = useImageCarouselMobile(ref6);
 
-  const [cardStyle, cardApi] = useSprings(5, () => ({
-    opacity: 0,
-    y: 50,
-    scale: 0.1,
-    config: { duration: 500, tension: 300, friction: 20 },
-  }));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          titleCardApi.start({ opacity: 1, y: 0 });
-          cardApi.start((i) => ({
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            delay: i * 200,
-          }));
-        } else {
-          titleCardApi.start({ opacity: 0, y: 50 });
-          cardApi.start((i) => ({
-            opacity: 0,
-            y: 50,
-            scale: 0.1,
-            delay: i * 200,
-          }));
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    if (refContainer.current) observer.observe(refContainer.current);
-    return () => observer.disconnect();
-  }, [titleCardApi, cardApi]);
-
-  return { refContainer, titleCardStyle, cardStyle };
-};
-
-export const useHighlightMotion = () => {
-  const refContainerHighlight = useRef(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  const [bgHiglight1Style, bgHighlight1Api] = useImgHighlightStyle();
-  const [bgHiglight2Style, bgHighlight2Api] = useImgHighlightStyle();
-  const [bgHiglight3Style, bgHighlight3Api] = useImgHighlightStyle();
-  const [bgHiglight4Style, bgHighlight4Api] = useImgHighlightStyle();
-  const [imgHiglightStyle, imgHighlightApi] = useImgHighlightStyle();
-
-  const [textHighlightStyle, textHighlightApi] = useTextFadeInStyle(50);
-
-  const [buttonHighlightStyle, buttonHighlightApi] = useSpring(() => ({
-    opacity: 0,
-    y: 50,
-    scale: 0.1,
-    config: { tension: 300, friction: 20 },
-  }));
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          bgHighlight1Api.start({ opacity: 1, x: 0 });
-          bgHighlight2Api.start({ opacity: 1, x: 0, delay: 300 });
-          bgHighlight3Api.start({ opacity: 1, x: 0, delay: 600 });
-          bgHighlight4Api.start({ opacity: 1, x: 0, delay: 900 });
-          imgHighlightApi.start({ opacity: 1, x: 0, delay: 1000 });
-
-          textHighlightApi.start({ opacity: 1, y: 0, delay: 1100 });
-          buttonHighlightApi.start({ opacity: 1, y: 0, scale: 1, delay: 1100 });
-
-          setHasAnimated(true);
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    if (refContainerHighlight.current)
-      observer.observe(refContainerHighlight.current);
-    return () => observer.disconnect();
-  }, [
-    bgHighlight1Api,
-    bgHighlight2Api,
-    bgHighlight3Api,
-    bgHighlight4Api,
-    imgHighlightApi,
-    textHighlightApi,
-    buttonHighlightApi,
-    hasAnimated,
-  ]);
+  useChain(
+    [ref1, ref2, ref3, ref4, ref5, ref6],
+    [0.5, 0.5, 1, 1.5, 2.5, 2.8],
+    1000,
+  );
 
   return {
-    refContainerHighlight,
+    bgHeadline1Mobile,
+    bgHeadline2Mobile,
+    bgHeadline3Mobile,
+    bgHeadline4Mobile,
+    imgHeadline5Mobile,
+    imgHeadline6Mobile,
+  };
+};
+
+export const useCardMotion = (inView, data) => {
+  const titleCardStyle = useSpring({
+    opacity: inView ? 1 : 0,
+    y: inView ? 0 : 50,
+    config: { tension: 300, friction: 30 },
+  });
+
+  const cardStyle = useSprings(
+    data.length,
+    data.map((item, i) => ({
+      opacity: inView ? 1 : 0,
+      transform: inView
+        ? "translateY(0px) scale(1)"
+        : "translateY(50px) scale(0.1)",
+      delay: i * 200,
+    })),
+  );
+
+  return { titleCardStyle, cardStyle };
+};
+
+export const useHighlightMotion = (inView) => {
+  const bgHiglight1Style = useSpring({
+    opacity: inView ? 1 : 0,
+    config: { tension: 300, friction: 30 },
+  });
+  const bgHiglight2Style = useSpring({
+    opacity: inView ? 1 : 0,
+    delay: 300,
+    config: { tension: 300, friction: 30 },
+  });
+  const bgHiglight3Style = useSpring({
+    opacity: inView ? 1 : 0,
+    delay: 600,
+    config: { tension: 300, friction: 30 },
+  });
+  const bgHiglight4Style = useSpring({
+    opacity: inView ? 1 : 0,
+    delay: 900,
+    config: { tension: 300, friction: 30 },
+  });
+  const imgHiglightStyle = useSpring({
+    opacity: inView ? 1 : 0,
+    delay: 1000,
+    config: { tension: 300, friction: 30 },
+  });
+
+  const textHighlightStyle = useSpring({
+    opacity: inView ? 1 : 0,
+    delay: 1200,
+    config: { tension: 300, friction: 30 },
+  });
+
+  const buttonHighlightStyle = useSpring({
+    opacity: inView ? 1 : 0,
+    y: inView ? 0 : 50,
+    scale: inView ? 1 : 0.1,
+    delay: 1300,
+    config: { tension: 300, friction: 20 },
+  });
+
+  return {
     bgHiglight1Style,
     bgHiglight2Style,
     bgHiglight3Style,
@@ -237,72 +257,89 @@ export const useHighlightMotion = () => {
   };
 };
 
-export const useStoryMotion = (storyById, storyDisplay) => {
-  const refContainerStory = useRef(null);
+export const useStoryMotion = (inView, storyById, storyDisplay) => {
   const storyLength = storyById ? storyById.story.length : 0;
-  const [hasEntered, setHasEntered] = useState(false);
+  const prevStory = useRef(storyDisplay);
+
+  let move = 0;
+  if (storyDisplay > prevStory.current) {
+    move = storyDisplay - prevStory.current === 1 ? -500 : 500;
+  } else if (storyDisplay < prevStory.current) {
+    move = prevStory.current - storyDisplay === 1 ? 500 : -500;
+  }
 
   const [imgStoryStyle, imgStoryApi] = useSpring(() => ({
-    x: -500,
+    x: move,
+    opacity: 0,
   }));
-  const [titleStoryStyle, titleStoryApi] = useTextFadeInStyle(20);
-  const [textStoryStyle, textStoryApi] = useSprings(storyLength, () => ({
+
+  const [titleStoryStyle, titleStoryApi] = useSpring(() => ({
+    opacity: 0,
+    y: 50,
+  }));
+
+  const [textStoryStyle, textStoryApi] = useSprings(storyLength, (i) => ({
     opacity: 0,
     y: 20,
   }));
-  const [creditStoryStyle, creditStoryApi] = useTextFadeInStyle(20);
+
+  const [creditStoryStyle, creditStoryApi] = useSpring(() => ({
+    opacity: 0,
+    y: 20,
+  }));
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasEntered(true);
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    if (refContainerStory.current) observer.observe(refContainerStory.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!hasEntered) return;
+    if (!inView) return;
 
     // reset
-    titleStoryApi.start({ opacity: 0, y: 20, immediate: true });
-    textStoryApi.start((i) => ({ opacity: 0, y: 20, immediate: true }));
-    creditStoryApi.start({ opacity: 0, y: 20, immediate: true });
-    imgStoryApi.start({ x: -500, immediate: true });
+    imgStoryApi.set({
+      x: move,
+      opacity: 0,
+    });
+    titleStoryApi.set({ opacity: 0, y: 50 });
+    textStoryApi.set((i) => ({ opacity: 0, y: 20 }));
+    creditStoryApi.set({ opacity: 0, y: 20 });
 
     // start
-    titleStoryApi.start({ opacity: 1, y: 0, delay: 300 });
+    imgStoryApi.start({
+      x: 0,
+      opacity: 1,
+      config: { tension: 200, friction: 30 },
+    });
+    titleStoryApi.start({
+      opacity: 1,
+      y: 0,
+      config: { tension: 200, friction: 30 },
+    });
     textStoryApi.start((i) => ({
       opacity: 1,
       y: 0,
       delay: (i + 1) * 800,
+      config: { tension: 200, friction: 30 },
     }));
     creditStoryApi.start({
       opacity: 1,
       y: 0,
       delay: (storyLength + 1) * 800,
+      config: { tension: 200, friction: 30 },
     });
-    imgStoryApi.start({ x: 0, config: { tension: 300, friction: 40 } });
+
+    prevStory.current = storyDisplay;
   }, [
     storyDisplay,
-    storyLength,
-    hasEntered,
+    inView,
+    move,
+    imgStoryApi,
     titleStoryApi,
     textStoryApi,
     creditStoryApi,
-    imgStoryApi,
+    storyLength,
   ]);
 
   return {
-    refContainerStory,
-    textStoryStyle,
-    titleStoryStyle,
-    creditStoryStyle,
     imgStoryStyle,
+    titleStoryStyle,
+    textStoryStyle,
+    creditStoryStyle,
   };
 };

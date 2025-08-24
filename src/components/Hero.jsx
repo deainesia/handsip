@@ -1,21 +1,20 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect } from "react";
 import { heroSlides } from "../data/hero";
-import { useMeasureSize } from "../hooks/useMeasureSize";
+import useMeasure from "react-use-measure";
 
-export default function Hero({ size }) {
+export default function Hero({ height, width }) {
   const [currentSlide, setCurrentSlide] = useState(1);
 
-  const containerRef = useRef();
-  const [containerHeight, containerWidth] = useMeasureSize(containerRef);
-  const [formHeight, formWidth] = size;
+  const [containerRef, { width: containerWidth, height: containerHeight }] =
+    useMeasure();
 
   const [imageSize, setImageSize] = useState([null, null]);
   const [imageHeight, imageWidth] = imageSize;
 
   useLayoutEffect(() => {
-    if (containerHeight && formHeight && containerWidth && formWidth) {
-      const calcImageHeight = containerHeight - formHeight + 30;
-      const calcImageWidth = containerWidth - formWidth + 30;
+    if (containerHeight && height && containerWidth && width) {
+      const calcImageHeight = containerHeight - height + 30;
+      const calcImageWidth = containerWidth - width + 30;
       setImageSize([calcImageHeight, calcImageWidth]);
     }
 
@@ -24,7 +23,7 @@ export default function Hero({ size }) {
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [containerHeight, containerWidth, formHeight, formWidth]);
+  }, [containerHeight, containerWidth, height, width]);
 
   return (
     <div

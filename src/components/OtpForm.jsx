@@ -2,12 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-export default function OtpForm({ email, size }) {
+export default function OtpForm({ email, height }) {
   const [otp, setOtp] = useState([...Array(5)]);
   const inputRefs = useRef([]);
   const [success, setSuccess] = useState(false);
-
-  const [height] = size;
 
   const handleChange = (i, valueInput) => {
     const result = [...otp];

@@ -1,25 +1,28 @@
 import Button from "./Button";
 import { navBarMenu } from "../data/navbar";
 import { Link, NavLink } from "react-router-dom";
-import { useRef } from "react";
-import { useMeasureSize } from "../hooks/useMeasureSize";
 import { useState } from "react";
+import { useNavbar } from "../styles/motion";
+// eslint-disable-next-line no-unused-vars
+import { animated } from "@react-spring/web";
+import useMeasure from "react-use-measure";
 
 export const NavBar = () => {
-  const widthRef = useRef(null);
-  const [, widthContainer] = useMeasureSize(widthRef);
+  const [widthRef, { width: widthContainer }] = useMeasure();
   const isMobile = widthContainer < 750;
 
   const [showMenu, setShowMenu] = useState(false);
 
+  //motion
+  const { transitions } = useNavbar(showMenu);
   return (
     <nav className="fixed top-0 left-0 z-10 w-full" ref={widthRef}>
       <p className="brand-text absolute top-2 left-0 z-10 ms-5 text-primary md:ms-10 lg:ms-14 xl:ms-20 2xl:ms-30">
         HandSip
       </p>
       {isMobile ? (
-        <div className="bg-white/50 px-5 py-2 backdrop-blur-sm">
-          <span className="flex flex-row items-center justify-end gap-2">
+        <>
+          <span className="flex flex-row items-center justify-end gap-2 bg-white px-5 py-2">
             {showMenu ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,16 +63,21 @@ export const NavBar = () => {
               </Link>
             </div>
           </span>
-          {showMenu && (
-            <span className="flex flex-row justify-center gap-4 pt-1">
-              {navBarMenu.map((item) => (
-                <NavLink to={item.link} key={item.id}>
-                  <p className="normal-text text-black">{item.title}</p>
-                </NavLink>
-              ))}
-            </span>
+          {transitions((style, item) =>
+            item ? (
+              <animated.span
+                style={style}
+                className="flex flex-row justify-center gap-4 bg-white px-5 py-2 pt-1"
+              >
+                {navBarMenu.map((item) => (
+                  <NavLink to={item.link} key={item.id}>
+                    <p className="normal-text text-black">{item.title}</p>
+                  </NavLink>
+                ))}
+              </animated.span>
+            ) : null,
           )}
-        </div>
+        </>
       ) : (
         <span className="relative flex flex-row justify-center gap-6 bg-white/50 py-4 backdrop-blur-sm lg:gap-8">
           {navBarMenu.map((item) => (

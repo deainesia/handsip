@@ -1,6 +1,6 @@
 import { githubLogo, appleLogo, googleLogo } from "../utils";
 import { useState, useRef, useCallback } from "react";
-import { useMeasureSize } from "../hooks/useMeasureSize";
+import useMeasure from "react-use-measure";
 import validator from "validator";
 import Button from "../components/Button";
 import InputText from "../components/InputText";
@@ -9,8 +9,7 @@ import OtpForm from "../components/OtpForm";
 import Hero from "../components/Hero";
 
 export const Login = () => {
-  const containerRef = useRef();
-  const size = useMeasureSize(containerRef);
+  const [containerRef, { width, height }] = useMeasure();
 
   const [toggle, setToggle] = useState(true);
   const [emailWarn, setEmailWarn] = useState();
@@ -141,9 +140,9 @@ export const Login = () => {
         </div>
       </div>
 
-      {success && <OtpForm email={email} size={size} />}
+      {success && <OtpForm email={email} height={height} />}
 
-      <Hero size={size} />
+      <Hero height={height} width={width} />
     </>
   );
 };

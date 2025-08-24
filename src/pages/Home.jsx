@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import Button from "../components/Button";
 import { Card } from "../components/Card";
 import { Tag } from "../components/Tag";
@@ -8,22 +7,24 @@ import { heroImageHome } from "../data/heroImageHome";
 import { perfectPairings } from "../data/perfectPairings";
 import { findTheOne } from "../data/findTheOne";
 import { highlightImage } from "../utils";
-import { useMeasureSize } from "../hooks/useMeasureSize";
+import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { animated } from "@react-spring/web";
+import { useInView } from "react-intersection-observer";
+import useMeasure from "react-use-measure";
 import {
   useBgHeadline,
+  useBgHeadlineMobile,
   useHeadlineText,
   useHighlightMotion,
   useStoryMotion,
 } from "../styles/motion";
 
 export const Home = () => {
-  const containerRef = useRef();
-  const imgStory = useRef();
-
-  const [heightContainer, widthContainer] = useMeasureSize(containerRef);
-  const [heightImgStory, widthImgStory] = useMeasureSize(imgStory);
+  const [containerRef, { width: widthContainer, height: heightContainer }] =
+    useMeasure();
+  const [imgStory, { width: widthImgStory, height: heightImgStory }] =
+    useMeasure();
 
   const isMobile = widthContainer < 750;
 
@@ -62,7 +63,19 @@ export const Home = () => {
   } = useBgHeadline(widthContainer);
 
   const {
-    refContainerHighlight,
+    bgHeadline1Mobile,
+    bgHeadline2Mobile,
+    bgHeadline3Mobile,
+    bgHeadline4Mobile,
+    imgHeadline5Mobile,
+    imgHeadline6Mobile,
+  } = useBgHeadlineMobile();
+
+  const { ref: refHighlight, inView: inViewHighlight } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+  const {
     bgHiglight1Style,
     bgHiglight2Style,
     bgHiglight3Style,
@@ -70,23 +83,22 @@ export const Home = () => {
     imgHiglightStyle,
     textHighlightStyle,
     buttonHighlightStyle,
-  } = useHighlightMotion();
+  } = useHighlightMotion(inViewHighlight);
 
-  const {
-    refContainerStory,
-    textStoryStyle,
-    titleStoryStyle,
-    creditStoryStyle,
-    imgStoryStyle,
-  } = useStoryMotion(storyById, storyDisplay);
+  const { ref: refStory, inView: inViewStory } = useInView({
+    threshold: 0.3,
+  });
+  const { textStoryStyle, titleStoryStyle, creditStoryStyle, imgStoryStyle } =
+    useStoryMotion(inViewStory, storyById, storyDisplay);
 
   return (
     <main ref={containerRef}>
-      <section
+      <animated.section
         id="home"
+        style={isMobile ? { bgHeadline1Mobile } : {}}
         className="relative flex h-screen w-full flex-col overflow-hidden max-md:bg-secondary-100 max-md:pt-16 md:flex-row"
       >
-        {!isMobile && (
+        {!isMobile ? (
           <div className="absolute flex h-full w-full flex-row">
             <animated.span
               style={bgHeadline1}
@@ -103,6 +115,21 @@ export const Home = () => {
             <animated.span
               style={bgHeadline4}
               className="bg-secondary-400"
+            ></animated.span>
+          </div>
+        ) : (
+          <div className="absolute bottom-0 left-0 flex h-4/12 w-full flex-col">
+            <animated.span
+              style={bgHeadline2Mobile}
+              className="h-4/12 bg-secondary-200"
+            ></animated.span>
+            <animated.span
+              style={bgHeadline3Mobile}
+              className="h-4/12 bg-secondary-300"
+            ></animated.span>
+            <animated.span
+              style={bgHeadline4Mobile}
+              className="h-4/12 bg-secondary-400"
             ></animated.span>
           </div>
         )}
@@ -149,47 +176,50 @@ export const Home = () => {
             </span>
           </animated.div>
         </div>
-        <div className="flex h-fit flex-row items-center max-md:relative max-md:py-4 md:w-6/12 md:flex-col">
-          {isMobile && (
-            <div className="absolute top-0 left-0 flex h-full w-full flex-col">
-              <span className="h-4/12 bg-secondary-200"></span>
-              <span className="h-4/12 bg-secondary-300"></span>
-              <span className="h-4/12 bg-secondary-400"></span>
-            </div>
-          )}
-
+        <animated.div
+          style={
+            isMobile
+              ? { ...imgHeadline5Mobile, ...imgHeadline6Mobile }
+              : { ...imgHeadline5, ...imgHeadline6 }
+          }
+          className="flex h-fit flex-row items-center max-md:relative max-md:pb-6 md:w-6/12 md:flex-col"
+        >
           {heroImages.map((item, i) => {
             return (
-              <animated.img
+              <img
                 src={item.image}
                 key={i}
                 style={{
-                  ...imgHeadline5,
-                  ...imgHeadline6,
                   ...(isMobile
                     ? {
                         height: widthContainer * 0.6,
                         width: heightContainer * 0.3,
                         objectFit: "cover",
                       }
-                    : widthContainer <= 1024
+                    : widthContainer > 1024
                       ? {
-                          height: heightContainer / 15,
+                          height: heightContainer / 6,
                           width: widthContainer / 4,
                           objectFit: "cover",
                         }
-                      : {
-                          height: heightContainer / 10,
-                          width: widthContainer / 5,
-                          objectFit: "cover",
-                        }),
+                      : widthContainer <= 1024
+                        ? {
+                            height: heightContainer / 8,
+                            width: widthContainer / 3,
+                            objectFit: "cover",
+                          }
+                        : {
+                            height: heightContainer / 9,
+                            width: widthContainer / 5,
+                            objectFit: "cover",
+                          }),
                 }}
                 className="z-5 rounded-lg max-md:mr-2 md:mb-2"
               />
             );
           })}
-        </div>
-      </section>
+        </animated.div>
+      </animated.section>
 
       <section id="best-seller">
         <Card title={"Best Seller Cups"} data={bestseller} />
@@ -197,7 +227,7 @@ export const Home = () => {
 
       <section
         id="highlight"
-        ref={refContainerHighlight}
+        ref={refHighlight}
         className="relative flex w-full flex-col max-md:bg-secondary-500 max-md:pt-7 md:flex-row"
       >
         {!isMobile && (
@@ -310,16 +340,10 @@ export const Home = () => {
         <Card title={"Perfect Pairings"} data={perfectPairings} />
       </section>
 
-      <section
-        id="cust-story"
-        ref={(el) => {
-          imgStory.current = el;
-          refContainerStory.current = el;
-        }}
-      >
+      <section id="cust-story" ref={imgStory}>
         <animated.div
           className="flex flex-col-reverse items-center justify-between md:flex-row"
-          key={storyById.id}
+          ref={refStory}
         >
           <animated.div
             className="relative z-5 flex flex-col overflow-hidden px-5 py-7 max-md:gap-4 md:h-[580px] md:w-6/12 md:justify-between md:py-12 md:ps-10 md:pe-7 lg:h-[700px] lg:py-16 lg:ps-14 lg:pe-10 xl:h-[610px] xl:py-18 xl:ps-20 xl:pe-14 2xl:h-[700px] 2xl:py-20 2xl:ps-30 2xl:pe-16"

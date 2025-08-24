@@ -1,15 +1,19 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 import { footer } from "../data/footer";
 import { instaIcon, tiktokIcon, twitterIcon, youtubeIcon } from "../utils";
-import { useMeasureSize } from "../hooks/useMeasureSize";
+import { useFooter } from "../styles/motion";
+// eslint-disable-next-line no-unused-vars
+import { animated } from "@react-spring/web";
+import useMeasure from "react-use-measure";
 
 export const Footer = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const containerRef = useRef();
-  const [, widthContainer] = useMeasureSize(containerRef);
-
+  const [containerRef, { width: widthContainer }] = useMeasure();
   const isMobile = widthContainer < 750;
+
+  //motion
+  const { transitions } = useFooter(showMenu);
 
   return (
     <footer className="flex w-full flex-col" ref={containerRef}>
@@ -77,7 +81,9 @@ export const Footer = () => {
                       strokeWidth={1.5}
                       stroke="currentColor"
                       className="size-4 text-primary"
-                      onClick={() => setShowMenu(item.id)}
+                      onClick={() => {
+                        setShowMenu(item.id);
+                      }}
                     >
                       <path
                         strokeLinecap="round"
@@ -90,19 +96,23 @@ export const Footer = () => {
               ) : (
                 <p className="normal-text text-primary">{item.title}</p>
               )}
-              {isMobile
-                ? showMenu &&
-                  item.id === showMenu &&
-                  item.menu.map((menu) => (
-                    <p className="normal-text" key={menu}>
-                      {menu}
-                    </p>
-                  ))
-                : item.menu.map((menu) => (
-                    <p className="normal-text" key={menu}>
-                      {menu}
-                    </p>
-                  ))}
+              {isMobile ? (
+                <animated.div style={{ ...transitions, overflow: "hidden" }}>
+                  {item.id == showMenu
+                    ? item.menu.map((menu) => (
+                        <p className="normal-text" key={menu}>
+                          {menu}
+                        </p>
+                      ))
+                    : null}
+                </animated.div>
+              ) : (
+                item.menu.map((menu) => (
+                  <p className="normal-text" key={menu}>
+                    {menu}
+                  </p>
+                ))
+              )}
             </div>
           ))}
         </div>

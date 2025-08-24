@@ -1,18 +1,19 @@
-import { useRef } from "react";
-import { useMeasureSize } from "../hooks/useMeasureSize";
 // eslint-disable-next-line no-unused-vars
 import { animated } from "@react-spring/web";
 import { useCardMotion } from "../styles/motion";
+import { useInView } from "react-intersection-observer";
+import useMeasure from "react-use-measure";
 
 export const Card = ({ title, data }) => {
-  const imgRef = useRef(null);
-  const [_, imgWidth] = useMeasureSize(imgRef);
+  const [imgRef, { width: imgWidth }] = useMeasure();
+  const widthImg = imgWidth;
   // motion
-  const { refContainer, titleCardStyle, cardStyle } = useCardMotion();
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+  const { titleCardStyle, cardStyle } = useCardMotion(inView, data);
 
   return (
     <div
-      ref={refContainer}
+      ref={ref}
       className="px-5 py-18 md:px-10 md:py-26 lg:px-14 lg:py-30 xl:px-20 xl:py-26 2xl:px-40 2xl:py-30"
     >
       <div className="relative mb-4 w-full">
@@ -41,14 +42,14 @@ export const Card = ({ title, data }) => {
         {cardStyle.map((style, i) => (
           <animated.div
             style={style}
-            className="relative flex-1"
             ref={imgRef}
+            className="relative flex-1"
             key={data[i].id}
           >
             <img
               src={data[i].img}
               className={`${data[i].position} mb-1 w-full rounded-lg object-cover`}
-              style={{ height: `${imgWidth}px` }}
+              style={{ height: `${widthImg}px` }}
             />
             <p className="normal-text font-semibold">{data[i].title}</p>
             {data[i].set ? (
