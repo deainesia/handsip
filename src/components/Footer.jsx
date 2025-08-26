@@ -100,7 +100,7 @@ export const Footer = () => {
                 <animated.div style={{ ...transitions, overflow: "hidden" }}>
                   {item.id == showMenu
                     ? item.menu.map((menu) => (
-                        <p className="normal-text" key={menu}>
+                        <p className="normal-text origin-top" key={menu}>
                           {menu}
                         </p>
                       ))

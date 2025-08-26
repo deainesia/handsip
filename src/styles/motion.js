@@ -9,20 +9,11 @@ import {
 } from "@react-spring/web";
 import { useRef, useEffect } from "react";
 
-const useMoveToRight = (ref, from, to) => {
+const useMoveToRight = (ref) => {
   return useSpring({
     ref: ref,
-    from: { width: `${from}%` },
-    to: { width: `${to}%` },
-    config: { duration: 1000, easing: easings.easeInExpo },
-  });
-};
-
-const useMoveToTop = (ref) => {
-  return useSpring({
-    ref: ref,
-    from: { x: 1000 },
-    to: { x: 0 },
+    from: { opacity: 0, transform: "scaleX(0)" },
+    to: { opacity: 1, transform: "scaleX(1)" },
     config: { duration: 1000, easing: easings.easeInExpo },
   });
 };
@@ -33,8 +24,7 @@ export const useFadeIn = (ref, y) => {
     from: { opacity: 0, y: y },
     to: { opacity: 1, y: 0 },
     config: {
-      tension: 300,
-      friction: 40,
+      duration: 400,
     },
   });
 };
@@ -79,9 +69,9 @@ const useImageCarouselMobile = (ref) => {
 
 export const useNavbar = (showMenu) => {
   const transitions = useTransition(showMenu, {
-    from: { height: 0, opacity: 0 },
-    enter: { height: 36, opacity: 1 },
-    leave: { height: 0, opacity: 0 },
+    from: { transform: "scaleY(0)", opacity: 0 },
+    enter: { transform: "scaleY(1)", opacity: 1 },
+    leave: { transform: "scaleY(0)", opacity: 0 },
   });
 
   return { transitions };
@@ -123,7 +113,7 @@ export const useHeadlineText = (letter1, letter2) => {
   };
 };
 
-export const useBgHeadline = (width) => {
+export const useBgHeadline = () => {
   const ref1 = useSpringRef();
   const ref2 = useSpringRef();
   const ref3 = useSpringRef();
@@ -131,16 +121,16 @@ export const useBgHeadline = (width) => {
   const ref5 = useSpringRef();
   const ref6 = useSpringRef();
 
-  const bgHeadline1 = useMoveToRight(ref1, 0, width / 2);
-  const bgHeadline2 = useMoveToRight(ref2, 0, width / 6);
-  const bgHeadline3 = useMoveToRight(ref3, 0, width / 6);
-  const bgHeadline4 = useMoveToRight(ref4, 0, width / 6);
+  const bgHeadline1 = useMoveToRight(ref1);
+  const bgHeadline2 = useMoveToRight(ref2);
+  const bgHeadline3 = useMoveToRight(ref3);
+  const bgHeadline4 = useMoveToRight(ref4);
   const imgHeadline5 = useFadeIn(ref5);
   const imgHeadline6 = useImageCarousel(ref6);
 
   useChain(
     [ref1, ref2, ref3, ref4, ref5, ref6],
-    [0, 0, 0.5, 1, 1.5, 2.5],
+    [0, 0.2, 0.5, 1, 1.5, 1.7],
     1000,
   );
 
@@ -157,31 +147,15 @@ export const useBgHeadline = (width) => {
 export const useBgHeadlineMobile = () => {
   const ref1 = useSpringRef();
   const ref2 = useSpringRef();
-  const ref3 = useSpringRef();
-  const ref4 = useSpringRef();
-  const ref5 = useSpringRef();
-  const ref6 = useSpringRef();
 
-  const bgHeadline1Mobile = useFadeIn(ref1);
-  const bgHeadline2Mobile = useMoveToTop(ref2);
-  const bgHeadline3Mobile = useMoveToTop(ref3);
-  const bgHeadline4Mobile = useMoveToTop(ref4);
-  const imgHeadline5Mobile = useFadeIn(ref5);
-  const imgHeadline6Mobile = useImageCarouselMobile(ref6);
+  const imgHeadline1Mobile = useFadeIn(ref1);
+  const imgHeadline2Mobile = useImageCarouselMobile(ref2);
 
-  useChain(
-    [ref1, ref2, ref3, ref4, ref5, ref6],
-    [0.5, 0.5, 1, 1.5, 2.5, 2.8],
-    1000,
-  );
+  useChain([ref1, ref2], [2, 2.3], 1000);
 
   return {
-    bgHeadline1Mobile,
-    bgHeadline2Mobile,
-    bgHeadline3Mobile,
-    bgHeadline4Mobile,
-    imgHeadline5Mobile,
-    imgHeadline6Mobile,
+    imgHeadline1Mobile,
+    imgHeadline2Mobile,
   };
 };
 
@@ -199,7 +173,7 @@ export const useCardMotion = (inView, data) => {
       transform: inView
         ? "translateY(0px) scale(1)"
         : "translateY(50px) scale(0.1)",
-      delay: i * 200,
+      delay: i * 100,
     })),
   );
 
@@ -209,40 +183,39 @@ export const useCardMotion = (inView, data) => {
 export const useHighlightMotion = (inView) => {
   const bgHiglight1Style = useSpring({
     opacity: inView ? 1 : 0,
-    config: { tension: 300, friction: 30 },
+    transform: inView ? "scaleX(1)" : "scaleX(0)",
+    delay: 100,
+    config: { duration: 300 },
   });
   const bgHiglight2Style = useSpring({
     opacity: inView ? 1 : 0,
-    delay: 300,
-    config: { tension: 300, friction: 30 },
+    transform: inView ? "scaleX(1)" : "scaleX(0)",
+    delay: 200,
+    config: { duration: 300 },
   });
   const bgHiglight3Style = useSpring({
     opacity: inView ? 1 : 0,
-    delay: 600,
-    config: { tension: 300, friction: 30 },
-  });
-  const bgHiglight4Style = useSpring({
-    opacity: inView ? 1 : 0,
-    delay: 900,
-    config: { tension: 300, friction: 30 },
+    transform: inView ? "scaleX(1)" : "scaleX(0)",
+    delay: 300,
+    config: { duration: 300 },
   });
   const imgHiglightStyle = useSpring({
     opacity: inView ? 1 : 0,
-    delay: 1000,
-    config: { tension: 300, friction: 30 },
+    delay: 500,
+    config: { duration: 300 },
   });
 
   const textHighlightStyle = useSpring({
     opacity: inView ? 1 : 0,
-    delay: 1200,
-    config: { tension: 300, friction: 30 },
+    delay: 800,
+    config: { duration: 300 },
   });
 
   const buttonHighlightStyle = useSpring({
     opacity: inView ? 1 : 0,
     y: inView ? 0 : 50,
     scale: inView ? 1 : 0.1,
-    delay: 1300,
+    delay: 1000,
     config: { tension: 300, friction: 20 },
   });
 
@@ -250,7 +223,6 @@ export const useHighlightMotion = (inView) => {
     bgHiglight1Style,
     bgHiglight2Style,
     bgHiglight3Style,
-    bgHiglight4Style,
     imgHiglightStyle,
     textHighlightStyle,
     buttonHighlightStyle,
@@ -314,13 +286,13 @@ export const useStoryMotion = (inView, storyById, storyDisplay) => {
     textStoryApi.start((i) => ({
       opacity: 1,
       y: 0,
-      delay: (i + 1) * 800,
+      delay: (i + 1) * 500,
       config: { tension: 200, friction: 30 },
     }));
     creditStoryApi.start({
       opacity: 1,
       y: 0,
-      delay: (storyLength + 1) * 800,
+      delay: (storyLength + 1) * 500,
       config: { tension: 200, friction: 30 },
     });
 

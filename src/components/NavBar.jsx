@@ -67,7 +67,7 @@ export const NavBar = () => {
             item ? (
               <animated.span
                 style={style}
-                className="flex flex-row justify-center gap-4 bg-white px-5 py-2 pt-1"
+                className="flex origin-top flex-row justify-center gap-4 bg-white px-5 py-2 pt-1"
               >
                 {navBarMenu.map((item) => (
                   <NavLink to={item.link} key={item.id}>

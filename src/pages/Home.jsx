@@ -21,10 +21,7 @@ import {
 } from "../styles/motion";
 
 export const Home = () => {
-  const [containerRef, { width: widthContainer, height: heightContainer }] =
-    useMeasure();
-  const [imgStory, { width: widthImgStory, height: heightImgStory }] =
-    useMeasure();
+  const [containerRef, { width: widthContainer }] = useMeasure();
 
   const isMobile = widthContainer < 750;
 
@@ -60,16 +57,9 @@ export const Home = () => {
     bgHeadline4,
     imgHeadline5,
     imgHeadline6,
-  } = useBgHeadline(widthContainer);
+  } = useBgHeadline();
 
-  const {
-    bgHeadline1Mobile,
-    bgHeadline2Mobile,
-    bgHeadline3Mobile,
-    bgHeadline4Mobile,
-    imgHeadline5Mobile,
-    imgHeadline6Mobile,
-  } = useBgHeadlineMobile();
+  const { imgHeadline1Mobile, imgHeadline2Mobile } = useBgHeadlineMobile();
 
   const { ref: refHighlight, inView: inViewHighlight } = useInView({
     threshold: 0.3,
@@ -79,7 +69,6 @@ export const Home = () => {
     bgHiglight1Style,
     bgHiglight2Style,
     bgHiglight3Style,
-    bgHiglight4Style,
     imgHiglightStyle,
     textHighlightStyle,
     buttonHighlightStyle,
@@ -95,44 +84,26 @@ export const Home = () => {
     <main ref={containerRef}>
       <animated.section
         id="home"
-        style={isMobile ? { bgHeadline1Mobile } : {}}
-        className="relative flex h-screen w-full flex-col overflow-hidden max-md:bg-secondary-100 max-md:pt-16 md:flex-row"
+        className="relative flex h-screen w-full flex-col overflow-hidden max-md:pt-16 md:flex-row"
       >
-        {!isMobile ? (
-          <div className="absolute flex h-full w-full flex-row">
-            <animated.span
-              style={bgHeadline1}
-              className="bg-secondary-100"
-            ></animated.span>
-            <animated.span
-              style={bgHeadline2}
-              className="bg-secondary-200"
-            ></animated.span>
-            <animated.span
-              style={bgHeadline3}
-              className="bg-secondary-300"
-            ></animated.span>
-            <animated.span
-              style={bgHeadline4}
-              className="bg-secondary-400"
-            ></animated.span>
-          </div>
-        ) : (
-          <div className="absolute bottom-0 left-0 flex h-4/12 w-full flex-col">
-            <animated.span
-              style={bgHeadline2Mobile}
-              className="h-4/12 bg-secondary-200"
-            ></animated.span>
-            <animated.span
-              style={bgHeadline3Mobile}
-              className="h-4/12 bg-secondary-300"
-            ></animated.span>
-            <animated.span
-              style={bgHeadline4Mobile}
-              className="h-4/12 bg-secondary-400"
-            ></animated.span>
-          </div>
-        )}
+        <div className="absolute left-0 flex h-full w-full flex-col max-md:bottom-0 md:top-0 md:flex-row">
+          <animated.span
+            style={bgHeadline1}
+            className="origin-left bg-secondary-100 max-md:h-10/12 md:w-6/12"
+          ></animated.span>
+          <animated.span
+            style={bgHeadline2}
+            className="origin-left bg-secondary-200 max-md:h-2/12 md:w-2/12"
+          ></animated.span>
+          <animated.span
+            style={bgHeadline3}
+            className="origin-left bg-secondary-300 max-md:h-2/12 md:w-2/12"
+          ></animated.span>
+          <animated.span
+            style={bgHeadline4}
+            className="origin-left bg-secondary-400 max-md:h-2/12 md:w-2/12"
+          ></animated.span>
+        </div>
 
         <div className="z-5 flex h-full w-full flex-col justify-center gap-6 px-5 md:w-6/12 md:ps-10 md:pr-8 lg:gap-8 lg:ps-14 xl:ps-20 xl:pr-16 2xl:ps-30">
           <span>
@@ -179,7 +150,7 @@ export const Home = () => {
         <animated.div
           style={
             isMobile
-              ? { ...imgHeadline5Mobile, ...imgHeadline6Mobile }
+              ? { ...imgHeadline1Mobile, ...imgHeadline2Mobile }
               : { ...imgHeadline5, ...imgHeadline6 }
           }
           className="flex h-fit flex-row items-center max-md:relative max-md:pb-6 md:w-6/12 md:flex-col"
@@ -189,32 +160,7 @@ export const Home = () => {
               <img
                 src={item.image}
                 key={i}
-                style={{
-                  ...(isMobile
-                    ? {
-                        height: widthContainer * 0.6,
-                        width: heightContainer * 0.3,
-                        objectFit: "cover",
-                      }
-                    : widthContainer > 1024
-                      ? {
-                          height: heightContainer / 6,
-                          width: widthContainer / 4,
-                          objectFit: "cover",
-                        }
-                      : widthContainer <= 1024
-                        ? {
-                            height: heightContainer / 8,
-                            width: widthContainer / 3,
-                            objectFit: "cover",
-                          }
-                        : {
-                            height: heightContainer / 9,
-                            width: widthContainer / 5,
-                            objectFit: "cover",
-                          }),
-                }}
-                className="z-5 rounded-lg max-md:mr-2 md:mb-2"
+                className="z-5 aspect-[9/13] w-6/12 rounded-lg object-cover max-md:mr-2 md:mb-2"
               />
             );
           })}
@@ -228,45 +174,32 @@ export const Home = () => {
       <section
         id="highlight"
         ref={refHighlight}
-        className="relative flex w-full flex-col max-md:bg-secondary-500 max-md:pt-7 md:flex-row"
+        className="relative flex w-full flex-col bg-secondary-500 max-md:pt-7 md:flex-row"
       >
-        {!isMobile && (
-          <div className="absolute top-0 flex h-full w-full flex-row">
-            <animated.span
-              style={bgHiglight1Style}
-              className="w-6/6 bg-secondary-500"
-            ></animated.span>
-            <animated.span
-              style={bgHiglight2Style}
-              className="w-2/6 bg-secondary-400"
-            ></animated.span>
-            <animated.span
-              style={bgHiglight3Style}
-              className="w-2/6 bg-secondary-300"
-            ></animated.span>
-            <animated.span
-              style={bgHiglight4Style}
-              className="w-2/6 bg-secondary-200"
-            ></animated.span>
-          </div>
-        )}
-
-        <div className="z-5 flex justify-end bg-secondary-500 md:w-6/12 md:max-xl:py-10">
+        <div className="z-5 md:w-6/12 md:max-xl:py-10 xl:ps-20 2xl:ps-30">
           <animated.img
             style={imgHiglightStyle}
             src={highlightImage}
-            className="size-fit object-cover xl:max-2xl:ps-20 2xl:w-5/6"
+            loading="lazy"
+            className="aspect-square object-cover"
           />
         </div>
 
         <div className="flex flex-col gap-3 px-5 py-8 max-md:relative md:w-6/12 md:justify-center md:gap-2 md:py-6 md:ps-5 md:pe-10 lg:justify-between lg:py-10 lg:ps-7 lg:pe-14 xl:py-18 xl:ps-10 xl:pe-20 2xl:py-20 2xl:pe-30">
-          {isMobile && (
-            <div className="absolute top-0 left-0 flex h-full w-full flex-col">
-              <span className="h-4/12 bg-secondary-400"></span>
-              <span className="h-4/12 bg-secondary-300"></span>
-              <span className="h-4/12 bg-secondary-200"></span>
-            </div>
-          )}
+          <div className="absolute top-0 right-0 flex h-full w-full flex-col md:w-6/12 md:flex-row">
+            <animated.span
+              style={bgHiglight1Style}
+              className="origin-left bg-secondary-400 max-md:h-4/12 md:w-2/6"
+            ></animated.span>
+            <animated.span
+              style={bgHiglight2Style}
+              className="origin-left bg-secondary-300 max-md:h-4/12 md:w-2/6"
+            ></animated.span>
+            <animated.span
+              style={bgHiglight3Style}
+              className="origin-left bg-secondary-200 max-md:h-4/12 md:w-2/6"
+            ></animated.span>
+          </div>
 
           <animated.p
             style={textHighlightStyle}
@@ -340,7 +273,7 @@ export const Home = () => {
         <Card title={"Perfect Pairings"} data={perfectPairings} />
       </section>
 
-      <section id="cust-story" ref={imgStory}>
+      <section id="cust-story">
         <animated.div
           className="flex flex-col-reverse items-center justify-between md:flex-row"
           ref={refStory}
@@ -437,33 +370,9 @@ export const Home = () => {
             >
               <img
                 src={storyById.image}
-                style={
-                  widthImgStory > 750
-                    ? { height: (heightImgStory * 85) / 100 }
-                    : { height: widthImgStory - 40 }
-                }
-                className="w-full object-cover max-md:rounded-lg md:rounded-r-lg"
+                className="aspect-square w-full object-cover max-md:rounded-lg md:rounded-r-lg"
               />
             </animated.div>
-
-            {isMobile && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="absolute left-0 ms-5 size-8 text-white"
-                style={{ top: (widthImgStory - 56) / 2 }}
-                onClick={handlePrevStory}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 19.5 8.25 12l7.5-7.5"
-                />
-              </svg>
-            )}
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -471,8 +380,23 @@ export const Home = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-8 text-white max-md:absolute max-md:right-0 max-md:me-5 md:text-black lg:size-10"
-              style={isMobile ? { top: (widthImgStory - 56) / 2 } : {}}
+              className="absolute inset-y-0 left-0 ms-5 size-8 h-full text-white md:hidden"
+              onClick={handlePrevStory}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-8 text-white max-md:absolute max-md:inset-y-0 max-md:right-0 max-md:me-5 max-md:h-full md:text-black lg:size-10"
               onClick={handleNextStory}
             >
               <path

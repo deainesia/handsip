@@ -2,12 +2,8 @@
 import { animated } from "@react-spring/web";
 import { useCardMotion } from "../styles/motion";
 import { useInView } from "react-intersection-observer";
-import useMeasure from "react-use-measure";
 
 export const Card = ({ title, data }) => {
-  const [imgRef, { width: imgWidth }] = useMeasure();
-  const widthImg = imgWidth;
-  // motion
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
   const { titleCardStyle, cardStyle } = useCardMotion(inView, data);
 
@@ -42,14 +38,13 @@ export const Card = ({ title, data }) => {
         {cardStyle.map((style, i) => (
           <animated.div
             style={style}
-            ref={imgRef}
             className="relative flex-1"
             key={data[i].id}
           >
             <img
               src={data[i].img}
-              className={`${data[i].position} mb-1 w-full rounded-lg object-cover`}
-              style={{ height: `${widthImg}px` }}
+              loading="lazy"
+              className={`${data[i].position} mb-1 aspect-square w-full rounded-lg object-cover`}
             />
             <p className="normal-text font-semibold">{data[i].title}</p>
             {data[i].set ? (
@@ -92,10 +87,7 @@ export const Card = ({ title, data }) => {
           </animated.div>
         ))}
 
-        <div
-          className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-secondary-100 md:hidden"
-          style={{ height: `${imgWidth}px` }}
-        >
+        <div className="flex aspect-square w-full flex-col items-center justify-center gap-1 rounded-lg bg-secondary-100 md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
