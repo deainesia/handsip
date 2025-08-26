@@ -14,7 +14,7 @@ const useMoveToRight = (ref) => {
     ref: ref,
     from: { opacity: 0, transform: "scaleX(0)" },
     to: { opacity: 1, transform: "scaleX(1)" },
-    config: { duration: 1000, easing: easings.easeInExpo },
+    config: { easing: easings.easeInExpo },
   });
 };
 
@@ -102,7 +102,7 @@ export const useHeadlineText = (letter1, letter2) => {
   const headlineText4 = useFadeIn(ref4, 0);
   const headlineText5 = useScaleOut(ref5);
 
-  useChain([ref1, ref2, ref3, ref4, ref5], [0, 0, 0.5, 1, 1.5], 1000);
+  useChain([ref1, ref2, ref3, ref4, ref5], [0.2, 0.2, 0.5, 1, 1.5], 1000);
 
   return {
     headlineText1,
@@ -151,7 +151,7 @@ export const useBgHeadlineMobile = () => {
   const imgHeadline1Mobile = useFadeIn(ref1);
   const imgHeadline2Mobile = useImageCarouselMobile(ref2);
 
-  useChain([ref1, ref2], [2, 2.3], 1000);
+  useChain([ref1, ref2], [1.5, 1.7], 1000);
 
   return {
     imgHeadline1Mobile,
@@ -159,25 +159,14 @@ export const useBgHeadlineMobile = () => {
   };
 };
 
-export const useCardMotion = (inView, data) => {
+export const useCardMotion = (inView) => {
   const titleCardStyle = useSpring({
     opacity: inView ? 1 : 0,
-    y: inView ? 0 : 50,
+    y: inView ? 0 : -20,
     config: { tension: 300, friction: 30 },
   });
 
-  const cardStyle = useSprings(
-    data.length,
-    data.map((item, i) => ({
-      opacity: inView ? 1 : 0,
-      transform: inView
-        ? "translateY(0px) scale(1)"
-        : "translateY(50px) scale(0.1)",
-      delay: i * 100,
-    })),
-  );
-
-  return { titleCardStyle, cardStyle };
+  return { titleCardStyle };
 };
 
 export const useHighlightMotion = (inView) => {

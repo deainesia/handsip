@@ -7,7 +7,7 @@ import { heroImageHome } from "../data/heroImageHome";
 import { perfectPairings } from "../data/perfectPairings";
 import { findTheOne } from "../data/findTheOne";
 import { highlightImage } from "../utils";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 // eslint-disable-next-line no-unused-vars
 import { animated } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
@@ -39,7 +39,23 @@ export const Home = () => {
   const text2 = "Feel the Craft.";
   const letter2 = text2.split("");
 
-  const heroImages = [...heroImageHome, ...heroImageHome];
+  // preload
+  const heroImages = useMemo(() => {
+    return [...heroImageHome, ...heroImageHome];
+  }, []);
+
+  useEffect(() => {
+    heroImages.forEach((src) => {
+      const img = new Image();
+      img.src = src.image;
+    });
+    const img = new Image();
+    img.src = highlightImage;
+    custStory.forEach((src) => {
+      const img = new Image();
+      img.src = src.image;
+    });
+  }, [heroImages]);
 
   // motion
   const {
@@ -82,7 +98,7 @@ export const Home = () => {
 
   return (
     <main ref={containerRef}>
-      <animated.section
+      <section
         id="home"
         className="relative flex h-screen w-full flex-col overflow-hidden max-md:pt-16 md:flex-row"
       >
@@ -165,7 +181,7 @@ export const Home = () => {
             );
           })}
         </animated.div>
-      </animated.section>
+      </section>
 
       <section id="best-seller">
         <Card title={"Best Seller Cups"} data={bestseller} />
@@ -180,7 +196,6 @@ export const Home = () => {
           <animated.img
             style={imgHiglightStyle}
             src={highlightImage}
-            loading="lazy"
             className="aspect-square object-cover"
           />
         </div>

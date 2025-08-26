@@ -2,10 +2,13 @@
 import { animated } from "@react-spring/web";
 import { useCardMotion } from "../styles/motion";
 import { useInView } from "react-intersection-observer";
+import { useState } from "react";
+import { SkeletonCard } from "./SkeletonCard";
 
 export const Card = ({ title, data }) => {
+  const [loading, setLoading] = useState(true);
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
-  const { titleCardStyle, cardStyle } = useCardMotion(inView, data);
+  const { titleCardStyle } = useCardMotion(inView, data);
 
   return (
     <div
@@ -34,44 +37,42 @@ export const Card = ({ title, data }) => {
           </svg>
         </span>
       </div>
+      {loading && <SkeletonCard loading={loading} />}
       <div className="grid grid-cols-2 grid-rows-3 gap-4 md:flex md:flex-row md:gap-3 lg:gap-4">
-        {cardStyle.map((style, i) => (
-          <animated.div
-            style={style}
-            className="relative flex-1"
-            key={data[i].id}
+        {data.map((item) => (
+          <div
+            className={`relative flex-1 ${loading ? "opacity-0" : "opacity-100"}`}
+            key={item.id}
+            onLoad={() => setLoading(false)}
           >
             <img
-              src={data[i].img}
+              src={item.img}
               loading="lazy"
-              className={`${data[i].position} mb-1 aspect-square w-full rounded-lg object-cover`}
+              className={`${item.position} mb-1 aspect-square w-full rounded-lg object-cover`}
             />
-            <p className="normal-text font-semibold">{data[i].title}</p>
-            {data[i].set ? (
-              data[i].teapot && (
+            <p className="normal-text font-semibold">{item.title}</p>
+            {item.set ? (
+              item.teapot && (
                 <p className="normal-text text-black-400">
-                  1 Teapot, {data[i].set} cups
+                  1 Teapot, {item.set} cups
                 </p>
               )
             ) : (
-              <p className="normal-text text-black-400">{data[i].volume} ml</p>
+              <p className="normal-text text-black-400">{item.volume} ml</p>
             )}
-            {data[i].disc != 0 ? (
+            {item.disc != 0 ? (
               <span className="flex flex-col">
                 <div className="inline-flex gap-1">
                   <p className="normal-text text-success">$</p>
                   <p className="normal-text text-black-300 line-through">
-                    {data[i].price.toFixed(2)}
+                    {item.price.toFixed(2)}
                   </p>
                   <p className="normal-text font-semibold text-success">
-                    {(
-                      data[i].price -
-                      (data[i].price * data[i].disc) / 100
-                    ).toFixed(2)}
+                    {(item.price - (item.price * item.disc) / 100).toFixed(2)}
                   </p>
                 </div>
                 <p className="small-text absolute top-1 right-1 w-fit rounded-lg bg-white p-1 text-success">
-                  {data[i].disc}% Off
+                  {item.disc}% Off
                 </p>
               </span>
             ) : (
@@ -79,12 +80,12 @@ export const Card = ({ title, data }) => {
                 <div className="inline-flex gap-1">
                   <p className="normal-text text-success">$</p>
                   <p className="normal-text font-semibold text-success">
-                    {data[i].price.toFixed(2)}
+                    {item.price.toFixed(2)}
                   </p>
                 </div>
               </span>
             )}
-          </animated.div>
+          </div>
         ))}
 
         <div className="flex aspect-square w-full flex-col items-center justify-center gap-1 rounded-lg bg-secondary-100 md:hidden">
