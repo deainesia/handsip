@@ -1,7 +1,6 @@
 import { githubLogo, appleLogo, googleLogo } from "../utils";
 import { useState, useRef, useCallback } from "react";
 import useMeasure from "react-use-measure";
-import validator from "validator";
 import Button from "../components/Button";
 import InputText from "../components/InputText";
 import Toggle from "../components/Toggle";
@@ -37,7 +36,7 @@ export const Login = () => {
       setPassWarn(undefined);
     }
 
-    const isEmailValid = validator.isEmail(email);
+    const isEmailValid = email !== "" ? true : false;
     if (!isEmailValid) {
       setEmailWarn("Please enter a valid email address.");
       emailRef.current.focus();

@@ -175,6 +175,7 @@ export const Home = () => {
             return (
               <img
                 src={item.image}
+                fetchPriority={i === 0 ? "high" : "auto"}
                 key={i}
                 className="z-5 aspect-[9/13] w-6/12 rounded-lg object-cover max-md:mr-2 md:mb-2"
               />

@@ -47,10 +47,8 @@ export default function Hero({ height, width }) {
             }}
           >
             <div className="heading-text text-secondary">
-              <p className="font-bonheur text-2xl md:max-xl:text-4xl xl:text-5xl">
-                HandSip.
-              </p>
-              <p>{item.text}</p>
+              <p className="brand-text">HandSip.</p>
+              <p className="brand-text">{item.text}</p>
             </div>
           </div>
         ))}
