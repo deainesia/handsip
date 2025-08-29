@@ -6,7 +6,7 @@
   "homepage": "https://deainesia.github.io/handsip/",
   "scripts": {
     "dev": "vite",
-    "build": "cross-env PUPPETEER_EXECUTABLE_PATH=C:\\Chromium\\chrome-win64\\chrome.exe vite build",
+    "build": "vite build",
     "postbuild": "cross-env PUPPETEER_EXECUTABLE_PATH=C:\\Chromium\\chrome-win64\\chrome.exe critical dist/index.html --base=dist --inline --dimensions=360x780 --dimensions=768x1024 --dimensions=1280x720 --dimensions=1536x864 --strict",
     "lint": "eslint .",
     "preview": "vite preview",
