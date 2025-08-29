@@ -43,7 +43,7 @@ Hello, I'm Dea. I build this project to practice frontend dev wokflows and creat
 
 4. **Care about Performance**
 
-   Performance test is always a part of my journey remembering on how important it is. I strive to keep the performance at the good state as recommendation. For this project, I keep LCP < 2.5s, CLS < 0.1 and INP < 200. To achieve that, I use `rollup-plugin-critical` to create critical CSS to minimize render blocking, compress image file and change the format to WEBP/AVIF, minimize heavy motion, set preload or lazy load images, and set fetch priority to enhance LCP. As I change default font, I also set font to _swap_ mode to prevent rendering delay.
+   Performance test is always a part of my journey remembering on how important it is. I strive to keep the performance at the good state as recommendation. For this project, I keep LCP < 2.5s, CLS < 0.1 and INP < 200. To achieve that, I use `critical` to create critical CSS to minimize render blocking, compress image file and change the format to WEBP/AVIF, minimize heavy motion, set preload or lazy load images, and set fetch priority to enhance LCP. As I change default font, I also set font to _swap_ mode to prevent rendering delay.
 
 5. **Add a little touch of SEO**
 
