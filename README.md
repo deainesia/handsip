@@ -29,7 +29,7 @@ Hello, I'm Dea. I build this project to practice frontend dev wokflows and creat
 
     Since I care about how to manage this project organized and well-structured, I started by design the UI first. I also created the guideline to cover this project's need, such as colors, typography, margin, and all the components I used like, card, navbar, etc.
 
-    I write about how I designed the UI and uploaded it on Dribbble, feel free to check it on ... (I excited to hear any suggestions from you <3)
+    I write about how I designed the UI and uploaded it on Dribbble, feel free to check it on [HandSip at Dribbble](https://dribbble.com/shots/26464291-HandSip-Homemade-Cup-Brand-Landing-Page) (I excited to hear any suggestions from you <3)
 
 2. **Design Into Code**
 
