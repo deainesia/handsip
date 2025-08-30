@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "cross-env PUPPETEER_EXECUTABLE_PATH=C:\\Chromium\\chrome-win64\\chrome.exe critical dist/index.html --base=dist --inline --dimensions=360x780 --dimensions=768x1024 --dimensions=1280x720 --dimensions=1536x864 --strict",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "pnpm build",
@@ -29,8 +28,6 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
-    "critical": "^7.2.1",
-    "cross-env": "^10.0.0",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -38,7 +35,6 @@
     "globals": "^15.15.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "puppeteer": "^24.17.1",
     "vite": "^6.2.0"
   }
 }
